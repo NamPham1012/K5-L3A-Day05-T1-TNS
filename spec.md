@@ -7,11 +7,11 @@
 ## Thành viên nhóm
 
 
-| Họ và Tên           | Mã Học Viên | Việc đã làm |
-| ------------------- | ----------- | ----------- |
-| Phạm Văn Nam        | 2A202603681 |             |
-| Vũ Thanh Toàn       |             |             |
-| Lê Nguyễn Hoàng Sơn |             |             |
+| Họ và Tên           | Mã Học Viên | Việc đã làm                                                                                                        |
+| ------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| Phạm Văn Nam        | 2A202603681 | Cùng nhóm làm R1–R6; giữ chính: dựng prototype index.html (§5) và demo ca nước muối (mức tự làm)                   |
+| Vũ Thanh Toàn       | 2A202603654 | Cùng nhóm làm R1–R6; giữ chính: §2 kịch bản rủi ro &amp; §3 khi AI sai; demo ca trẻ sốt (hỏi lại + chuyển dược sĩ) |
+| Lê Nguyễn Hoàng Sơn | 2A202603686 | Cùng nhóm làm R1–R6; giữ chính: §4 mức tự chủ (gồm tool khó xếp) &amp; §6 tiêu chí; demo ca cấp cứu (việc cấm)     |
 
 
 
