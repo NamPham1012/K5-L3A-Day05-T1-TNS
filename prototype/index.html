@@ -696,7 +696,6 @@
       <!-- LEGEND -->
       <aside class="legend" aria-label="Chú thích nguyên tắc">
         <h3>Mỗi số = một nguyên tắc & một mức tự chủ</h3>
-        <p class="sub">Khớp bảng <b>spec.md §5</b>. TA hỏi "chỗ nào là G10?" — chỉ vào số tương ứng trên màn hình.</p>
         <div class="lg">
           <div class="n">1</div>
           <div><b>G1 / G2 — Minh bạch là AI.</b> Header nói rõ đang chat với Trợ lý AI và giới hạn của nó (Luật AI
@@ -779,7 +778,7 @@
         me('Bé 8 tháng, 8kg');
         setTimeout(() => raw(`<div class="card">
       <div><span class="mk">5</span>Bé còn nhỏ nên em <b>không tự gợi ý thuốc</b>. Em chuyển bạn cho <b>dược sĩ trực</b> để tư vấn đúng liều cho bé nhé.</div>
-      <div class="status">⏳ Đang kết nối dược sĩ — họ thấy: "bé 8 tháng / 8kg, sốt 38.5, cần tư vấn hạ sốt".</div>
+      <div class="status">⏳ Đang kết nối dược sĩ .</div>
       <div class="act"><button class="b primary">Chat với dược sĩ</button></div></div>`), 450);
       },
       big() {
@@ -797,8 +796,7 @@
       <h4>Hãy đưa bác đi cấp cứu ngay</h4>
       <div>Đau tức ngực kèm khó thở có thể là cấp cứu tim mạch. <b>Gọi 115 hoặc tới cơ sở y tế gần nhất ngay bây giờ.</b></div>
       <div class="status">🚑 Đã chuyển dược sĩ trực — ưu tiên (0 giây). Giữ máy nhé.</div>
-      <div class="act"><button class="b call"><span class="mk">6</span>📞 Gọi 115</button><button class="b ghost">Chỉ đường cơ sở y tế</button></div>
-      <div class="ev">Màn này cố ý <b>không có nút mua/đặt thuốc</b> — <code>ban_thuoc_ke_don</code> và gợi ý bị khóa.</div></div>`), 450);
+      <div class="act"><button class="b call"><span class="mk">6</span>📞 Gọi 115</button><button class="b ghost">Chỉ đường cơ sở y tế</button></div>`), 450);
       }
     };
     document.querySelectorAll('[data-sc]').forEach(b => b.onclick = () => flows[b.dataset.sc]());
