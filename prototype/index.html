@@ -807,6 +807,7 @@
     document.getElementById('theme').onclick = () => { const r = document.documentElement; const d = r.getAttribute('data-theme') === 'dark' || (!r.getAttribute('data-theme') && matchMedia('(prefers-color-scheme:dark)').matches); r.setAttribute('data-theme', d ? 'light' : 'dark'); };
   </script>
 
+
   <script>
     /* ===== ⑦ BỘ ĐỊNH TUYẾN RÀNG BUỘC BẰNG TỪ KHOÁ (ca lạ) =====
        Thứ tự: R1 cấp cứu (độc quyền) → R2 kê đơn → R3 liều → R4 tương tác → R5 kéo dài → R6 chẩn đoán → R7 lưu hồ sơ
@@ -1217,7 +1218,7 @@
       }
 
       /* ---------- hiển thị + vết + nhật ký ---------- */
-      function addHTML(html) { const d = document.createElement('div'); d.innerHTML = html; [...d.children].forEach(n => chatEl.appendChild(n)); chatEl.scrollTop = chatEl.scrollHeight; }
+      function addHTML(html) { const d = document.createElement('div'); d.innerHTML = html;[...d.children].forEach(n => chatEl.appendChild(n)); chatEl.scrollTop = chatEl.scrollHeight; }
       function finish(text, cards, tr) {
         tr.run = uniq(tr.run); tr.blocked = uniq(tr.blocked);
         cards.forEach(addHTML);
