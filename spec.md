@@ -64,22 +64,37 @@ Trong kênh chat Hỏi dược sĩ của Pharmacity, khi **khách** nhắn hỏi
 
 > [HƯỚNG DẪN] Chỉ làm cho **2 kịch bản đắt nhất** ở §2.
 
-### Kịch bản đắt nhất 1 — #__
+### Kịch bản đắt nhất 1 — #4  (ba đau tức ngực, khó thở → dấu hiệu cấp cứu)
 
-- **AI nói (nguyên văn):** "…"
-- **Người dùng thấy gì:** độ chắc / bằng chứng / nút / nhãn — …
-- **Làm gì tiếp được:** sửa / bỏ qua / hỏi người / hoàn tác — …
-- **Ai được báo, sau bao lâu, thấy gì:** …
-- **Quyết định:** hỏi lại / trả lời kèm giới hạn / dừng & chuyển người — chọn …, loại … vì …
-- **Loại lỗi:** hệ thống / người dùng / ngữ cảnh — và cách nói, cách sửa theo loại đó …
-- **Nguyên tắc HAX/PAIR (2–3), mỗi cái trỏ chỗ cụ thể:**
-  - G__ → …
-  - G__ → …
-- **Lỗi sửa câu chữ không cứu được (nếu có) + thiết kế cứu nó:** …
+Tin khách: *"ba e đau tức ngực, khó thở, hồi hộp, có thuốc j k"*
 
-### Kịch bản đắt nhất 2 — #__
+- **AI nói (nguyên văn):** "Những dấu hiệu bác đang gặp (đau tức ngực, khó thở) có thể là cấp cứu. **Hãy gọi 115 hoặc đưa bác tới cơ sở y tế gần nhất ngay bây giờ.** Em không gợi ý thuốc cho trường hợp này. Em đã báo dược sĩ trực để hỗ trợ bạn ngay — bạn giữ máy nhé."
+- **Người dùng thấy gì:** một **thẻ cảnh báo đỏ** nổi bật (không phải bong bóng chat thường), nút **"Gọi 115"** bấm được, dòng trạng thái "⏳ đang kết nối dược sĩ…"; **không có** nút đặt thuốc / gợi ý sản phẩm nào trong màn này.
+- **Làm gì tiếp được:** bấm gọi 115 ngay; hoặc chờ dược sĩ (đang được kết nối). Nếu khách **không làm gì**, dược sĩ vẫn nhận ca trong hàng ưu tiên nên không bị kẹt chờ.
+- **Ai được báo, sau bao lâu, thấy gì:** `chuyen_duoc_si` chạy **ngay (0 giây), cờ ƯU TIÊN**; dược sĩ thấy tóm tắt "nghi cấp cứu tim mạch — đau ngực + khó thở" đặt lên đầu hàng chờ.
+- **Quyết định:** chọn **dừng & chuyển người + khuyên đi khám ngay**. Loại "trả lời kèm giới hạn" (vẫn gợi ý thuốc kèm cảnh báo) vì khách đang hoảng dễ bám vào thuốc mà bỏ đi khám; loại "hỏi lại" vì hỏi thêm làm **chậm** một ca có thể nguy kịch — ở đây chờ cũng là một kiểu sai.
+- **Loại lỗi:** **lỗi ngữ cảnh (context error)** — hệ thống chạy đúng thiết kế "khách hỏi thuốc → tư vấn", nhưng sai với tình huống thật (đây là cấp cứu, không phải mua thuốc). Vì là lỗi ngữ cảnh nên **phải sửa bằng thiết kế** (bộ nhận diện dấu hiệu nguy hiểm), không chỉ sửa câu chữ; lời xin lỗi/trấn an không giải quyết được gì.
+- **Nguyên tắc HAX/PAIR (trỏ chỗ cụ thể):**
+  - **G10 — Thu hẹp phạm vi khi nghi ngờ** → khi phát hiện từ khoá nguy hiểm, AI *không* đoán thuốc mà rút về hành động an toàn nhất: bảo đi khám + chuyển người.
+  - **G1 — Làm rõ hệ thống làm được gì** → câu "Em không gợi ý thuốc cho trường hợp này" nói thẳng giới hạn, không giả vờ xử lý được.
+  - **PAIR · Errors + Graceful Failure** → ca nguy hiểm có đường lui riêng (thẻ đỏ + nút 115 + chuyển ưu tiên), khác hẳn luồng mua thuốc thường.
+- **Lỗi sửa câu chữ không cứu được + thiết kế cứu nó:** nếu AI đã trót gọi `goi_y_san_pham` thì thêm câu "nhớ đi khám nhé" **không cứu được** — khách đã thấy gợi ý thuốc. Phải chặn từ **thiết kế**: một bước **phát hiện dấu hiệu nguy hiểm chạy trước mọi gợi ý sản phẩm**, hễ dính thì khoá nhánh gợi ý thuốc lại.
 
-*(lặp cùng khung trên)*
+### Kịch bản đắt nhất 2 — #1  (trẻ nhỏ sốt, thiếu tuổi/cân nặng)
+
+Tin khách: *"con e sốt 38.5 từ tối qua, có thuốc gì cho hạ k ạ"*
+
+- **AI nói (nguyên văn):** "Để gợi ý đúng và an toàn cho bé, em cần biết thêm: **bé mấy tuổi và nặng khoảng bao nhiêu kg ạ?** Liều hạ sốt cho trẻ tính theo cân nặng nên em chưa thể gợi ý khi chưa rõ. Nếu bé dưới 3 tháng, sốt cao hoặc li bì, mình nên cho bé đi khám sớm nhé."
+- **Người dùng thấy gì:** câu **hỏi lại một câu** (tuổi + cân nặng) nổi rõ; **chưa có** thẻ sản phẩm / nút đặt thuốc nào xuất hiện (AI chưa gọi `goi_y_san_pham`); một dòng nhỏ "AI đang hỗ trợ · câu chuyên môn sẽ chuyển dược sĩ" cho biết đây là AI và giới hạn của nó.
+- **Làm gì tiếp được:** khách trả lời tuổi/cân nặng → nếu là **trẻ nhỏ**, AI **không tự gợi ý** mà `chuyen_duoc_si`; khách cũng có thể bấm "Chat với dược sĩ" bất cứ lúc nào để bỏ qua bước hỏi.
+- **Ai được báo, sau bao lâu, thấy gì:** khi xác định là trẻ nhỏ, `chuyen_duoc_si` chạy; dược sĩ thấy tóm tắt "bé sốt 38.5, chưa rõ tuổi/cân nặng, cần tư vấn hạ sốt".
+- **Quyết định:** chọn **hỏi lại một câu** trước. Loại "tự trả lời + gợi ý ngay" vì thiếu tuổi/cân nặng mà gợi ý là đoán liều cho trẻ — hại không đảo được; loại "chuyển dược sĩ ngay lập tức" vì với trẻ lớn, triệu chứng nhẹ thì một câu sàng lọc là đủ, chuyển ngay làm khách thường **chờ vô ích**.
+- **Loại lỗi:** **lỗi người dùng cung cấp thiếu thông tin** (thiếu tuổi/cân nặng) — không phải AI hỏng. Vì vậy cách xử đúng là **hỏi lại để lấp thông tin**, giọng không xin lỗi mà giải thích *vì sao cần* (liều theo cân nặng), để khách thấy hợp lý chứ không bị làm khó.
+- **Nguyên tắc HAX/PAIR (trỏ chỗ cụ thể):**
+  - **G10 — Thu hẹp phạm vi khi nghi ngờ** → thiếu thông tin thì hỏi lại 1 câu thay vì đoán thuốc.
+  - **G11 — Giải thích vì sao** → câu "liều hạ sốt cho trẻ tính theo cân nặng nên em chưa thể gợi ý" nói rõ lý do hỏi, không bắt khách làm theo một cách mù mờ.
+  - **G2 — Làm rõ nó làm tốt đến đâu** → dòng "câu chuyên môn sẽ chuyển dược sĩ" cho khách biết AI chỉ sàng lọc, không thay dược sĩ.
+- **Lỗi sửa câu chữ không cứu được + thiết kế cứu nó:** nếu luồng mặc định là "có triệu chứng → `goi_y_san_pham` ngay" thì dù câu chữ lịch sự vẫn sai. Thiết kế cứu: **chặn `goi_y_san_pham` cho tới khi đã biết người dùng thuốc là ai (tuổi/đối tượng)**; trẻ nhỏ/bà bầu/người già → tự động rẽ sang `chuyen_duoc_si`.
 
 ---
 
