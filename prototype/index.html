@@ -1,216 +1,1290 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hỏi dược sĩ — T1 TNS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap">
-<style>
-  /* Layout: hai cột — điện thoại chat + bảng chú thích; tông giấy kem kiểu Claude, accent coral, sáng/tối */
-  :root{
-    --paper:#faf9f5; --panel:#ffffff; --raised:#f4f2ec;
-    --ink:#2b2a27; --muted:#6b6862; --line:#e6e2d8;
-    --accent:#c4623f; --accent-soft:#f6e9e2;
-    --ai-bubble:#f4f2ec; --user-bubble:#efe4db;
-    --ok:#3c7d5a; --ok-soft:#e6f1ea;
-    --warn:#9a6a12; --warn-soft:#f8efda;
-    --danger:#b23b2e; --danger-soft:#f8e4e0;
-    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
-    --sans:"Inter",system-ui,"Segoe UI",Roboto,Arial,sans-serif;
-  }
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --paper:#262624; --panel:#30302e; --raised:#3a3a37;
-    --ink:#f3f1ea; --muted:#a5a199; --line:#43423e;
-    --accent:#e08862; --accent-soft:#3c322c;
-    --ai-bubble:#3a3a37; --user-bubble:#413530;
-    --ok:#7fc29b; --ok-soft:#2b352e;
-    --warn:#e0b45e; --warn-soft:#3a3327;
-    --danger:#e58a7c; --danger-soft:#3c2b28;
-    color-scheme:dark;
-  }}
-  :root[data-theme="dark"]{
-    --paper:#262624; --panel:#30302e; --raised:#3a3a37;
-    --ink:#f3f1ea; --muted:#a5a199; --line:#43423e;
-    --accent:#e08862; --accent-soft:#3c322c;
-    --ai-bubble:#3a3a37; --user-bubble:#413530;
-    --ok:#7fc29b; --ok-soft:#2b352e;
-    --warn:#e0b45e; --warn-soft:#3a3327;
-    --danger:#e58a7c; --danger-soft:#3c2b28;
-    color-scheme:dark;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hỏi dược sĩ — T1 TNS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    /* Layout: hai cột — điện thoại chat + bảng chú thích; tông giấy kem kiểu Claude, accent coral, sáng/tối */
+    :root {
+      --paper: #faf9f5;
+      --panel: #ffffff;
+      --raised: #f4f2ec;
+      --ink: #2b2a27;
+      --muted: #6b6862;
+      --line: #e6e2d8;
+      --accent: #c4623f;
+      --accent-soft: #f6e9e2;
+      --ai-bubble: #f4f2ec;
+      --user-bubble: #efe4db;
+      --ok: #3c7d5a;
+      --ok-soft: #e6f1ea;
+      --warn: #9a6a12;
+      --warn-soft: #f8efda;
+      --danger: #b23b2e;
+      --danger-soft: #f8e4e0;
+      --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans: "Inter", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    }
 
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.5;
-    padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #262624;
+        --panel: #30302e;
+        --raised: #3a3a37;
+        --ink: #f3f1ea;
+        --muted: #a5a199;
+        --line: #43423e;
+        --accent: #e08862;
+        --accent-soft: #3c322c;
+        --ai-bubble: #3a3a37;
+        --user-bubble: #413530;
+        --ok: #7fc29b;
+        --ok-soft: #2b352e;
+        --warn: #e0b45e;
+        --warn-soft: #3a3327;
+        --danger: #e58a7c;
+        --danger-soft: #3c2b28;
+        color-scheme: dark;
+      }
+    }
 
-  .page{max-width:940px;margin:0 auto;padding-block:28px 40px}
-  .masthead{margin-bottom:22px}
-  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
-  .masthead h1{font-family:var(--serif);font-weight:700;font-size:clamp(26px,4vw,38px);margin:.18em 0 .1em;text-wrap:balance;letter-spacing:-.01em}
-  .masthead p{margin:0;color:var(--muted);max-width:60ch}
+    :root[data-theme="dark"] {
+      --paper: #262624;
+      --panel: #30302e;
+      --raised: #3a3a37;
+      --ink: #f3f1ea;
+      --muted: #a5a199;
+      --line: #43423e;
+      --accent: #e08862;
+      --accent-soft: #3c322c;
+      --ai-bubble: #3a3a37;
+      --user-bubble: #413530;
+      --ok: #7fc29b;
+      --ok-soft: #2b352e;
+      --warn: #e0b45e;
+      --warn-soft: #3a3327;
+      --danger: #e58a7c;
+      --danger-soft: #3c2b28;
+      color-scheme: dark;
+    }
 
-  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
-  .tbtn{font-family:var(--sans);font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--panel);color:var(--ink);
-    border-radius:10px;padding:8px 13px;cursor:pointer;transition:border-color .15s,background .15s}
-  .tbtn:hover{border-color:var(--accent)}
-  .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .hint{font-size:12.5px;color:var(--muted)}
+    * {
+      box-sizing: border-box
+    }
 
-  .grid{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+    html,
+    body {
+      margin: 0
+    }
 
-  /* phone */
-  .phone{flex:1 1 360px;min-width:300px;max-width:400px;background:var(--panel);border:1px solid var(--line);
-    border-radius:26px;overflow:hidden;box-shadow:0 18px 50px -18px rgba(60,40,25,.28);display:flex;flex-direction:column;height:700px}
-  .hd{background:var(--accent);color:#fff;padding:14px 16px}
-  .hd .t{font-family:var(--serif);font-weight:700;font-size:16px;display:flex;align-items:center;gap:9px}
-  .pill{background:rgba(255,255,255,.22);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;font-family:var(--sans);letter-spacing:.02em}
-  .hd .s{font-size:12px;opacity:.95;margin-top:5px;display:flex;align-items:flex-start;gap:0}
-  .chat{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
-  .row{display:flex}
-  .row.me{justify-content:flex-end}
-  .msg{max-width:84%;padding:10px 13px;border-radius:16px;font-size:14px}
-  .ai .msg{background:var(--ai-bubble);border-bottom-left-radius:5px}
-  .me .msg{background:var(--user-bubble);color:var(--ink);border-bottom-right-radius:5px}
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+      padding-block: 0
+    }
 
-  .card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:13px 14px;font-size:13.5px;max-width:92%}
-  .card.prod{border-color:var(--accent)}
-  .card.warn{background:var(--warn-soft);border-color:#e7cf9a}
-  .card.danger{background:var(--danger-soft);border:1.5px solid var(--danger)}
-  .card h4{font-family:var(--serif);margin:0 0 5px;font-size:15px}
-  .card.danger h4{color:var(--danger)}
-  .conf{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:7px}
-  .conf.hi{background:var(--ok-soft);color:var(--ok)}
-  .conf.lo{background:var(--warn-soft);color:var(--warn)}
-  .conf.dg{background:#fff;color:var(--danger)}
-  .ev{font-size:11.5px;color:var(--muted);margin-top:5px}
-  .act{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
-  .b{font-family:var(--sans);border:none;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:600;cursor:pointer}
-  .b.primary{background:var(--accent);color:#fff}
-  .b.ghost{background:var(--raised);color:var(--ink);border:1px solid var(--line)}
-  .b.undo{background:var(--panel);color:var(--accent);border:1px solid var(--accent)}
-  .b.call{background:var(--danger);color:#fff}
-  .b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .status{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 2px}
+    .page {
+      max-width: 940px;
+      margin: 0 auto;
+      padding-block: 28px 40px
+    }
 
-  .compose{border-top:1px solid var(--line);padding:12px;background:var(--panel);display:flex;flex-direction:column;gap:7px}
-  .compose .lbl{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
-  .sc{text-align:left;background:var(--raised);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)}
-  .sc:hover{border-color:var(--accent)}
+    .masthead {
+      margin-bottom: 22px
+    }
 
-  /* annotation marker */
-  .mk{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;background:var(--accent);color:#fff;
-    border-radius:999px;font-size:11px;font-weight:700;margin-right:6px;vertical-align:middle;font-family:var(--sans)}
-  .hidemk .mk{display:none}
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600
+    }
 
-  /* legend */
-  .legend{flex:1 1 360px;min-width:280px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
-  .legend h3{font-family:var(--serif);margin:0 0 4px;font-size:18px}
-  .legend .sub{margin:0 0 14px;color:var(--muted);font-size:13px}
-  .lg{display:flex;gap:11px;padding:11px 0;border-top:1px solid var(--line);font-size:13px}
-  .lg .n{min-width:22px;height:22px;background:var(--accent-soft);color:var(--accent);border-radius:999px;display:flex;
-    align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:0 0 auto}
-  .lg b{color:var(--ink)}
-  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--raised);color:var(--muted);margin-top:3px}
-  .tag.ok{background:var(--ok-soft);color:var(--ok)}
-  .tag.ask{background:var(--warn-soft);color:var(--warn)}
-  .tag.ban{background:var(--danger-soft);color:var(--danger)}
+    .masthead h1 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(26px, 4vw, 38px);
+      margin: .18em 0 .1em;
+      text-wrap: balance;
+      letter-spacing: -.01em
+    }
 
-  @media (prefers-reduced-motion:no-preference){.card,.row{animation:rise .28s ease both}}
-  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-</style>
+    .masthead p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 60ch
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px
+    }
+
+    .tbtn {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 8px 13px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s
+    }
+
+    .tbtn:hover {
+      border-color: var(--accent)
+    }
+
+    .tbtn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    .hint {
+      font-size: 12.5px;
+      color: var(--muted)
+    }
+
+    .grid {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-start
+    }
+
+    /* phone */
+    .phone {
+      flex: 1 1 360px;
+      min-width: 300px;
+      max-width: 400px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px -18px rgba(60, 40, 25, .28);
+      display: flex;
+      flex-direction: column;
+      height: 700px
+    }
+
+    .hd {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 16px
+    }
+
+    .hd .t {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, .22);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      letter-spacing: .02em
+    }
+
+    .hd .s {
+      font-size: 12px;
+      opacity: .95;
+      margin-top: 5px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0
+    }
+
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .row {
+      display: flex
+    }
+
+    .row.me {
+      justify-content: flex-end
+    }
+
+    .msg {
+      max-width: 84%;
+      padding: 10px 13px;
+      border-radius: 16px;
+      font-size: 14px
+    }
+
+    .ai .msg {
+      background: var(--ai-bubble);
+      border-bottom-left-radius: 5px
+    }
+
+    .me .msg {
+      background: var(--user-bubble);
+      color: var(--ink);
+      border-bottom-right-radius: 5px
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-size: 13.5px;
+      max-width: 92%
+    }
+
+    .card.prod {
+      border-color: var(--accent)
+    }
+
+    .card.warn {
+      background: var(--warn-soft);
+      border-color: #e7cf9a
+    }
+
+    .card.danger {
+      background: var(--danger-soft);
+      border: 1.5px solid var(--danger)
+    }
+
+    .card h4 {
+      font-family: var(--serif);
+      margin: 0 0 5px;
+      font-size: 15px
+    }
+
+    .card.danger h4 {
+      color: var(--danger)
+    }
+
+    .conf {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 7px
+    }
+
+    .conf.hi {
+      background: var(--ok-soft);
+      color: var(--ok)
+    }
+
+    .conf.lo {
+      background: var(--warn-soft);
+      color: var(--warn)
+    }
+
+    .conf.dg {
+      background: #fff;
+      color: var(--danger)
+    }
+
+    .ev {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 5px
+    }
+
+    .act {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 9px
+    }
+
+    .b {
+      font-family: var(--sans);
+      border: none;
+      border-radius: 10px;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer
+    }
+
+    .b.primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .b.ghost {
+      background: var(--raised);
+      color: var(--ink);
+      border: 1px solid var(--line)
+    }
+
+    .b.undo {
+      background: var(--panel);
+      color: var(--accent);
+      border: 1px solid var(--accent)
+    }
+
+    .b.call {
+      background: var(--danger);
+      color: #fff
+    }
+
+    .b:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin: 8px 0 2px
+    }
+
+    .compose {
+      border-top: 1px solid var(--line);
+      padding: 12px;
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .compose .lbl {
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .sc {
+      text-align: left;
+      background: var(--raised);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: var(--sans)
+    }
+
+    .sc:hover {
+      border-color: var(--accent)
+    }
+
+    /* annotation marker */
+    .mk {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 19px;
+      height: 19px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 6px;
+      vertical-align: middle;
+      font-family: var(--sans)
+    }
+
+    .hidemk .mk {
+      display: none
+    }
+
+    /* legend */
+    .legend {
+      flex: 1 1 360px;
+      min-width: 280px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px
+    }
+
+    .legend h3 {
+      font-family: var(--serif);
+      margin: 0 0 4px;
+      font-size: 18px
+    }
+
+    .legend .sub {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .lg {
+      display: flex;
+      gap: 11px;
+      padding: 11px 0;
+      border-top: 1px solid var(--line);
+      font-size: 13px
+    }
+
+    .lg .n {
+      min-width: 22px;
+      height: 22px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      flex: 0 0 auto
+    }
+
+    .lg b {
+      color: var(--ink)
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--raised);
+      color: var(--muted);
+      margin-top: 3px
+    }
+
+    .tag.ok {
+      background: var(--ok-soft);
+      color: var(--ok)
+    }
+
+    .tag.ask {
+      background: var(--warn-soft);
+      color: var(--warn)
+    }
+
+    .tag.ban {
+      background: var(--danger-soft);
+      color: var(--danger)
+    }
+
+    /* ⑦ ô gõ ca lạ + vết định tuyến + bảng luật + nhật ký */
+    .phone {
+      height: 780px
+    }
+
+    .ask {
+      display: flex;
+      gap: 6px
+    }
+
+    .ask input {
+      flex: 1;
+      min-width: 0;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--raised);
+      color: var(--ink)
+    }
+
+    .ask input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px
+    }
+
+    .trace {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 6px 10px;
+      max-width: 92%;
+      background: var(--paper)
+    }
+
+    .trace summary {
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .trace .tb {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 2px 3px 0 0
+    }
+
+    .chip.ok {
+      background: var(--ok-soft);
+      color: var(--ok)
+    }
+
+    .chip.ban {
+      background: var(--danger-soft);
+      color: var(--danger)
+    }
+
+    .card.undone {
+      opacity: .55
+    }
+
+    .b:disabled {
+      opacity: .6;
+      cursor: default
+    }
+
+    .sec {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2px solid var(--line)
+    }
+
+    .rules details {
+      border-top: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 12.5px
+    }
+
+    .rules summary {
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .rules .rid {
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 4px
+    }
+
+    .rules .how {
+      margin: 5px 0 3px;
+      color: var(--ink)
+    }
+
+    .rules .kw {
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.6
+    }
+
+    .log {
+      font-size: 12px;
+      padding-left: 18px;
+      color: var(--muted);
+      max-height: 240px;
+      overflow: auto;
+      margin: 6px 0 10px
+    }
+
+    .log li {
+      margin-bottom: 6px
+    }
+
+    .log b {
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    @media (prefers-reduced-motion:no-preference) {
+
+      .card,
+      .row {
+        animation: rise .28s ease both
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="page">
-  <header class="masthead">
-    <div class="eyebrow">Lab K5 · Track 1 Y tế · Nhóm TNS</div>
-    <h1>Hỏi dược sĩ — khi trợ lý AI không chắc</h1>
-    <p>Prototype một kênh chat Pharmacity: AI sàng lọc trước, nhưng mỗi việc có một mức tự chủ khác nhau tùy cái giá khi sai. Bấm thử ba tình huống bên dưới.</p>
-  </header>
+  <div class="page">
+    <header class="masthead">
+      <div class="eyebrow">Lab K5 · Track 1 Y tế · Nhóm TNS</div>
+      <h1>Hỏi dược sĩ — khi trợ lý AI không chắc</h1>
+      <p>Prototype một kênh chat Pharmacity: AI sàng lọc trước, nhưng mỗi việc có một mức tự chủ khác nhau tùy cái giá
+        khi sai. Bấm thử ba tình huống bên dưới.</p>
+    </header>
 
-  <div class="toolbar">
-    <button class="tbtn" id="toggleMk">Ẩn / hiện chú thích HAX</button>
-    <button class="tbtn" id="theme">Sáng / tối</button>
-    <button class="tbtn" id="reset">Làm lại</button>
-    <span class="hint">Số ①–⑥ trên màn hình trỏ về nguyên tắc ở bảng bên phải.</span>
+    <div class="toolbar">
+      <button class="tbtn" id="toggleMk">Ẩn / hiện chú thích HAX</button>
+      <button class="tbtn" id="theme">Sáng / tối</button>
+      <button class="tbtn" id="reset">Làm lại</button>
+      <span class="hint">Số ①–⑦ trên màn hình trỏ về nguyên tắc ở bảng bên phải.</span>
+    </div>
+
+    <div class="grid">
+      <!-- PHONE -->
+      <section class="phone" id="phone" aria-label="Màn hình chat">
+        <div class="hd">
+          <div class="t">Hỏi dược sĩ <span class="pill">Trợ lý AI</span></div>
+          <div class="s"><span class="mk">1</span><span>Bạn đang chat với Trợ lý AI. Câu chuyên môn sẽ chuyển dược
+              sĩ.</span></div>
+        </div>
+        <div class="chat" id="chat">
+          <div class="row ai">
+            <div class="msg">Dạ em là Trợ lý AI của Pharmacity. Em hỗ trợ về giá, tồn kho và sàng lọc ban đầu. Mình cần
+              giúp gì ạ?</div>
+          </div>
+        </div>
+        <div class="compose">
+          <div class="lbl">Chọn tình huống khách nhắn (dữ liệu dựng)</div>
+          <button class="sc" data-sc="otc">🟢 "Pharmacity còn nước muối sinh lý không, tối nay qua lấy"</button>
+          <button class="sc" data-sc="child">🟡 "Con em sốt 38.5, có thuốc gì cho hạ không ạ"</button>
+          <button class="sc" data-sc="er">🔴 "Ba em đau tức ngực, khó thở, có thuốc gì không"</button>
+          <div class="lbl"><span class="mk">7</span>Hoặc gõ ca lạ — định tuyến bằng luật từ khoá</div>
+          <form class="ask" id="askForm" autocomplete="off">
+            <input id="askInput" type="text" placeholder="Gõ tin khách bất kỳ (có/không dấu đều được)…"
+              aria-label="Tin nhắn ca lạ">
+            <button class="b primary" type="submit">Gửi</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- LEGEND -->
+      <aside class="legend" aria-label="Chú thích nguyên tắc">
+        <h3>Mỗi số = một nguyên tắc & một mức tự chủ</h3>
+        <p class="sub">Khớp bảng <b>spec.md §5</b>. TA hỏi "chỗ nào là G10?" — chỉ vào số tương ứng trên màn hình.</p>
+        <div class="lg">
+          <div class="n">1</div>
+          <div><b>G1 / G2 — Minh bạch là AI.</b> Header nói rõ đang chat với Trợ lý AI và giới hạn của nó (Luật AI
+            134/2025, Đ.11).<br><span class="tag">transparency</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">2</div>
+          <div><b>G2 — Hiện độ chắc + bằng chứng.</b> Nhãn độ chắc và dòng "căn cứ: còn hàng…" để khách tự
+            kiểm.<br><span class="tag ok">tự làm</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">3</div>
+          <div><b>G9 — Hoàn tác dễ.</b> Gợi ý OTC AI tự gửi nhưng có nút Hoàn tác ngay cạnh.<br><span class="tag ok">tự
+              làm · gui_goi_y (OTC)</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">4</div>
+          <div><b>G10 + G11 — Nghi ngờ thì thu hẹp & giải thích.</b> Thiếu tuổi/cân nặng → AI hỏi lại, chưa gợi ý, nói
+            rõ vì sao.<br><span class="tag ask">chưa gọi gui_goi_y</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">5</div>
+          <div><b>Chuyển người.</b> Trẻ nhỏ → chuyển dược sĩ, AI không tự gợi ý thuốc.<br><span class="tag ask">cần
+              người</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">6</div>
+          <div><b>G10 + Graceful Failure.</b> Ca cấp cứu: thẻ đỏ + nút 115, chuyển ưu tiên, không có nút mua.<br><span
+              class="tag ban">cấm · ban_thuoc_ke_don</span></div>
+        </div>
+        <div class="lg">
+          <div class="n">7</div>
+          <div><b>G10 + mặc định an toàn — Bộ định tuyến ràng buộc.</b> Tin gõ tự do đi qua các nhóm luật từ khoá theo
+            thứ tự ưu tiên: nguy hiểm luôn thắng, thuốc kê đơn luôn cấm, không khớp luật nào thì <i>không gợi ý</i> mà
+            hỏi lại + mời dược sĩ. Mỗi câu trả lời có "vết định tuyến" ghi luật khớp, tool chạy, tool bị khoá.<br><span
+              class="tag ask">fail-safe · ca lạ</span></div>
+        </div>
+
+        <div class="sec rules">
+          <h3>Luật định tuyến (thứ tự ưu tiên)</h3>
+          <p class="sub" id="rulesSub">So khớp không dấu, hiểu teen-code (k, ko, j, dc, bn, e, r…). Bấm từng luật để xem
+            từ khoá.</p>
+          <div id="rulesPanel"></div>
+        </div>
+
+        <div class="sec">
+          <h3>Nhật ký ca lạ</h3>
+          <p class="sub">Mỗi tin gõ tay được ghi lại — dùng để điền spec §7.</p>
+          <ol class="log" id="caseLog"></ol>
+          <button class="tbtn" id="copyLog">Sao chép bảng (Markdown)</button>
+          <span class="hint" id="copyMsg"></span>
+        </div>
+      </aside>
+    </div>
   </div>
 
-  <div class="grid">
-    <!-- PHONE -->
-    <section class="phone" id="phone" aria-label="Màn hình chat">
-      <div class="hd">
-        <div class="t">Hỏi dược sĩ <span class="pill">Trợ lý AI</span></div>
-        <div class="s"><span class="mk">1</span><span>Bạn đang chat với Trợ lý AI. Câu chuyên môn sẽ chuyển dược sĩ.</span></div>
-      </div>
-      <div class="chat" id="chat">
-        <div class="row ai"><div class="msg">Dạ em là Trợ lý AI của Pharmacity. Em hỗ trợ về giá, tồn kho và sàng lọc ban đầu. Mình cần giúp gì ạ?</div></div>
-      </div>
-      <div class="compose">
-        <div class="lbl">Chọn tình huống khách nhắn (dữ liệu dựng)</div>
-        <button class="sc" data-sc="otc">🟢 "Pharmacity còn nước muối sinh lý không, tối nay qua lấy"</button>
-        <button class="sc" data-sc="child">🟡 "Con em sốt 38.5, có thuốc gì cho hạ không ạ"</button>
-        <button class="sc" data-sc="er">🔴 "Ba em đau tức ngực, khó thở, có thuốc gì không"</button>
-      </div>
-    </section>
+  <script>
+    const chat = document.getElementById('chat');
+    function me(t) { const r = document.createElement('div'); r.className = 'row me'; r.innerHTML = '<div class="msg">' + t + '</div>'; chat.appendChild(r); chat.scrollTop = chat.scrollHeight; }
+    function raw(html) { const d = document.createElement('div'); d.innerHTML = html; chat.appendChild(d.firstElementChild); chat.scrollTop = chat.scrollHeight; }
 
-    <!-- LEGEND -->
-    <aside class="legend" aria-label="Chú thích nguyên tắc">
-      <h3>Mỗi số = một nguyên tắc & một mức tự chủ</h3>
-      <p class="sub">Khớp bảng <b>spec.md §5</b>. TA hỏi "chỗ nào là G10?" — chỉ vào số tương ứng trên màn hình.</p>
-      <div class="lg"><div class="n">1</div><div><b>G1 / G2 — Minh bạch là AI.</b> Header nói rõ đang chat với Trợ lý AI và giới hạn của nó (Luật AI 134/2025, Đ.11).<br><span class="tag">transparency</span></div></div>
-      <div class="lg"><div class="n">2</div><div><b>G2 — Hiện độ chắc + bằng chứng.</b> Nhãn độ chắc và dòng "căn cứ: còn hàng…" để khách tự kiểm.<br><span class="tag ok">tự làm</span></div></div>
-      <div class="lg"><div class="n">3</div><div><b>G9 — Hoàn tác dễ.</b> Gợi ý OTC AI tự gửi nhưng có nút Hoàn tác ngay cạnh.<br><span class="tag ok">tự làm · gui_goi_y (OTC)</span></div></div>
-      <div class="lg"><div class="n">4</div><div><b>G10 + G11 — Nghi ngờ thì thu hẹp & giải thích.</b> Thiếu tuổi/cân nặng → AI hỏi lại, chưa gợi ý, nói rõ vì sao.<br><span class="tag ask">chưa gọi gui_goi_y</span></div></div>
-      <div class="lg"><div class="n">5</div><div><b>Chuyển người.</b> Trẻ nhỏ → chuyển dược sĩ, AI không tự gợi ý thuốc.<br><span class="tag ask">cần người</span></div></div>
-      <div class="lg"><div class="n">6</div><div><b>G10 + Graceful Failure.</b> Ca cấp cứu: thẻ đỏ + nút 115, chuyển ưu tiên, không có nút mua.<br><span class="tag ban">cấm · ban_thuoc_ke_don</span></div></div>
-    </aside>
-  </div>
-</div>
-
-<script>
-const chat=document.getElementById('chat');
-function me(t){const r=document.createElement('div');r.className='row me';r.innerHTML='<div class="msg">'+t+'</div>';chat.appendChild(r);chat.scrollTop=chat.scrollHeight;}
-function raw(html){const d=document.createElement('div');d.innerHTML=html;chat.appendChild(d.firstElementChild);chat.scrollTop=chat.scrollHeight;}
-
-const flows={
-  otc(){me('Pharmacity còn nước muối sinh lý không, tối nay qua lấy');
-    setTimeout(()=>raw(`<div class="card prod">
+    const flows = {
+      otc() {
+        me('Pharmacity còn nước muối sinh lý không, tối nay qua lấy');
+        setTimeout(() => raw(`<div class="card prod">
       <span class="conf hi"><span class="mk">2</span>Độ chắc cao</span>
       <h4>Nước muối sinh lý NaCl 0.9% (500ml)</h4>
       <div>Còn hàng tại các chi nhánh gần bạn · 8.000đ.</div>
-      <div class="ev"><span class="mk">2</span>Căn cứ: <code>kiem_tra_ton_kho</code> — còn hàng (chỉ đọc, đảo được). Hàng OTC thông thường, không cần sàng lọc y tế.</div>
-      <div class="act"><button class="b primary">Đặt sản phẩm</button><button class="b undo"><span class="mk">3</span>↶ Hoàn tác gợi ý</button></div></div>`),450);},
-  child(){me('Con em sốt 38.5, có thuốc gì cho hạ không ạ');
-    setTimeout(()=>raw(`<div class="card warn">
+      <div class="ev"><span class="mk">2</span>Căn cứ: kiểm tra tồn kho — còn hàng (chỉ đọc, đảo được). Hàng OTC thông thường, không cần sàng lọc y tế.</div>
+      <div class="act"><button class="b primary">Đặt sản phẩm</button><button class="b undo"><span class="mk">3</span>↶ Hoàn tác gợi ý</button></div></div>`), 450);
+      },
+      child() {
+        me('Con em sốt 38.5, có thuốc gì cho hạ không ạ');
+        setTimeout(() => raw(`<div class="card warn">
       <span class="conf lo"><span class="mk">4</span>Cần thêm thông tin — chưa gợi ý thuốc</span>
       <div>Để an toàn cho bé, em cần biết: <b>bé mấy tuổi và nặng khoảng bao nhiêu kg?</b> <span class="mk">4</span>Liều hạ sốt cho trẻ tính theo cân nặng nên em chưa thể gợi ý khi chưa rõ.</div>
-      <div class="act"><button class="b ghost" onclick="flows.infant()">Bé 8 tháng, 8kg</button><button class="b ghost" onclick="flows.big()">Bé 10 tuổi, 30kg</button></div></div>`),450);},
-  infant(){me('Bé 8 tháng, 8kg');
-    setTimeout(()=>raw(`<div class="card">
+      <div class="act"><button class="b ghost" onclick="flows.infant()">Bé 8 tháng, 8kg</button><button class="b ghost" onclick="flows.big()">Bé 10 tuổi, 30kg</button></div></div>`), 450);
+      },
+      infant() {
+        me('Bé 8 tháng, 8kg');
+        setTimeout(() => raw(`<div class="card">
       <div><span class="mk">5</span>Bé còn nhỏ nên em <b>không tự gợi ý thuốc</b>. Em chuyển bạn cho <b>dược sĩ trực</b> để tư vấn đúng liều cho bé nhé.</div>
       <div class="status">⏳ Đang kết nối dược sĩ — họ thấy: "bé 8 tháng / 8kg, sốt 38.5, cần tư vấn hạ sốt".</div>
-      <div class="act"><button class="b primary">Chat với dược sĩ</button></div></div>`),450);},
-  big(){me('Bé 10 tuổi, 30kg');
-    setTimeout(()=>raw(`<div class="card prod">
+      <div class="act"><button class="b primary">Chat với dược sĩ</button></div></div>`), 450);
+      },
+      big() {
+        me('Bé 10 tuổi, 30kg');
+        setTimeout(() => raw(`<div class="card prod">
       <span class="conf hi"><span class="mk">2</span>Độ chắc vừa — nên hỏi dược sĩ nếu sốt kéo dài</span>
       <h4>Thuốc hạ sốt cho trẻ (paracetamol)</h4>
       <div class="ev"><span class="mk">2</span>Căn cứ: bé 30kg, trong ngưỡng dùng được. Em <b>không nói liều</b> — liều theo nhãn hoặc dược sĩ.</div>
-      <div class="act"><button class="b primary">Xem sản phẩm</button><button class="b undo"><span class="mk">3</span>↶ Hoàn tác</button><button class="b ghost">Hỏi dược sĩ</button></div></div>`),450);},
-  er(){me('Ba em đau tức ngực, khó thở, có thuốc gì không');
-    setTimeout(()=>raw(`<div class="card danger">
+      <div class="act"><button class="b primary">Xem sản phẩm</button><button class="b undo"><span class="mk">3</span>↶ Hoàn tác</button><button class="b ghost">Hỏi dược sĩ</button></div></div>`), 450);
+      },
+      er() {
+        me('Ba em đau tức ngực, khó thở, có thuốc gì không');
+        setTimeout(() => raw(`<div class="card danger">
       <span class="conf dg"><span class="mk">6</span>⚠ Dấu hiệu nguy hiểm — KHÔNG gợi ý thuốc</span>
       <h4>Hãy đưa bác đi cấp cứu ngay</h4>
       <div>Đau tức ngực kèm khó thở có thể là cấp cứu tim mạch. <b>Gọi 115 hoặc tới cơ sở y tế gần nhất ngay bây giờ.</b></div>
       <div class="status">🚑 Đã chuyển dược sĩ trực — ưu tiên (0 giây). Giữ máy nhé.</div>
       <div class="act"><button class="b call"><span class="mk">6</span>📞 Gọi 115</button><button class="b ghost">Chỉ đường cơ sở y tế</button></div>
-      <div class="ev">Màn này cố ý <b>không có nút mua/đặt thuốc</b> — <code>ban_thuoc_ke_don</code> và gợi ý bị khóa.</div></div>`),450);}
-};
-document.querySelectorAll('[data-sc]').forEach(b=>b.onclick=()=>flows[b.dataset.sc]());
-document.getElementById('toggleMk').onclick=()=>document.getElementById('phone').classList.toggle('hidemk');
-document.getElementById('reset').onclick=()=>{chat.innerHTML='<div class="row ai"><div class="msg">Dạ em là Trợ lý AI của Pharmacity. Em hỗ trợ về giá, tồn kho và sàng lọc ban đầu. Mình cần giúp gì ạ?</div></div>';};
-document.getElementById('theme').onclick=()=>{const r=document.documentElement;const d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark');};
-</script>
+      <div class="ev">Màn này cố ý <b>không có nút mua/đặt thuốc</b> — <code>ban_thuoc_ke_don</code> và gợi ý bị khóa.</div></div>`), 450);
+      }
+    };
+    document.querySelectorAll('[data-sc]').forEach(b => b.onclick = () => flows[b.dataset.sc]());
+    document.getElementById('toggleMk').onclick = () => document.getElementById('phone').classList.toggle('hidemk');
+    document.getElementById('reset').onclick = () => { chat.innerHTML = '<div class="row ai"><div class="msg">Dạ em là Trợ lý AI của Pharmacity. Em hỗ trợ về giá, tồn kho và sàng lọc ban đầu. Mình cần giúp gì ạ?</div></div>'; };
+    document.getElementById('theme').onclick = () => { const r = document.documentElement; const d = r.getAttribute('data-theme') === 'dark' || (!r.getAttribute('data-theme') && matchMedia('(prefers-color-scheme:dark)').matches); r.setAttribute('data-theme', d ? 'light' : 'dark'); };
+  </script>
+
+  <script>
+    /* ===== ⑦ BỘ ĐỊNH TUYẾN RÀNG BUỘC BẰNG TỪ KHOÁ (ca lạ) =====
+       Thứ tự: R1 cấp cứu (độc quyền) → R2 kê đơn → R3 liều → R4 tương tác → R5 kéo dài → R6 chẩn đoán → R7 lưu hồ sơ
+       → R13 thú cưng → R8/R9 triệu chứng → R10 tồn kho → R11 chất lượng → R12 gặp người → R13/R14 → R99 mặc định an toàn. */
+    (() => {
+      const chatEl = document.getElementById('chat');
+      const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const uniq = a => [...new Set(a)];
+      const T = { kho: 'kiem_tra_ton_kho', soan: 'soan_goi_y', gui: 'gui_goi_y', ds: 'chuyen_duoc_si', kham: 'khuyen_di_kham', luu: 'luu_ghi_chu_suc_khoe', ban: 'ban_thuoc_ke_don' };
+
+      /* ---------- chuẩn hoá: thường, bỏ dấu, teen-code ---------- */
+      const TEEN = { k: 'khong', ko: 'khong', kh: 'khong', khg: 'khong', hok: 'khong', hem: 'khong', kô: 'khong', j: 'gi', gj: 'gi', dc: 'duoc', ntn: 'nhu the nao', bn: 'bao nhieu', bnh: 'bao nhieu', bnhieu: 'bao nhieu', e: 'em', a: 'anh', mk: 'minh', mik: 'minh', mjk: 'minh', r: 'roi', vs: 'voi', ng: 'nguoi', ns: 'noi', z: 'vay', v: 'vay', tks: 'cam on', thanks: 'cam on', thank: 'cam on', ck: 'chong', vk: 'vo', bt: 'binh thuong', sp: 'san pham', oke: 'ok', okie: 'ok' };
+      function norm(s) {
+        let t = s.toLowerCase().replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '');
+        t = t.replace(/(\d),(\d)/g, '$1.$2').replace(/(\d)\s*°/g, '$1 do ');
+        t = t.replace(/(\d)([a-z])/g, '$1 $2').replace(/([a-z])(\d)/g, '$1 $2');
+        t = t.replace(/[^a-z0-9.]+/g, ' ').replace(/(?<!\d)\.|\.(?!\d)/g, ' ');
+        t = t.split(/\s+/).filter(Boolean).map(w => TEEN[w] ?? w).join(' ');
+        return ' ' + t + ' ';
+      }
+      const has = (t, k) => t.includes(' ' + k + ' ');
+      const hits = (t, list) => list.filter(k => has(t, k));
+      const rawHas = (r, w) => new RegExp('(^|[^\\p{L}])' + w + '(?=$|[^\\p{L}])', 'u').test(r);
+      const rawHits = (r, list) => list.filter(w => rawHas(r, w));
+      const byLen = a => a.slice().sort((x, y) => y.length - x.length);
+      function strip(t, kws) { byLen(kws).forEach(k => { while (has(t, k)) t = t.replace(' ' + k + ' ', ' '); }); return t; }
+      const NEG = ['khong co', 'khong bi', 'khong dang', 'chua co', 'chua tung', 'khong', 'chua'];
+      function stripNeg(t, kws) { byLen(kws).forEach(k => NEG.forEach(n => { while (has(t, n + ' ' + k)) t = t.replace(' ' + n + ' ' + k + ' ', ' '); })); return t; }
+
+      /* ---------- TỪ KHOÁ (dạng không dấu) ---------- */
+      const KW = {
+        danger: ['dau nguc', 'tuc nguc', 'nhoi nguc', 'that nguc', 'dau that nguc', 'kho tho', 'tho gap', 'tho rit', 'tho kho', 'tho khong noi', 'khong tho duoc', 'tho doc', 'hut hoi', 'ngop tho', 'ngat tho', 'tho kho khe',
+          'ngat xiu', 'bi ngat', 'ngat di', 'xiu', 'bat tinh', 'mat y thuc', 'goi khong tinh', 'lay khong tinh', 'khong tinh tao', 'lo mo', 'li bi', 'mo man', 'lu lan', 'khong day noi', 'khong day duoc', 'nam li',
+          'co giat', 'len con', 'giat kinh', 'dot quy', 'meo mieng', 'meo mat', 'liet', 'yeu nua nguoi', 'te nua nguoi', 'noi ngong', 'noi khong ro', 'dau dau du doi', 'dau dau nhu bua bo', 'cung co', 'co cung',
+          'tim tai', 'moi tim', 'da tim', 'non ra mau', 'oi ra mau', 'ho ra mau', 'di ngoai ra mau', 'di cau ra mau', 'phan den', 'tieu ra mau', 'chay mau nhieu', 'chay mau khong cam', 'mat mau', 'bang huyet',
+          'dau bung du doi', 'dau bung quan', 'bung cung', 'non lien tuc', 'non nhieu', 'mat nuoc nang', 'khong di tieu', 'mat trung', 'thop trung',
+          'ban xuat huyet', 'cham xuat huyet', 'xuat huyet', 'sung moi', 'sung mat', 'sung hong', 'sung luoi', 'phu mat', 'soc phan ve', 'phan ve', 'noi me day toan than',
+          'tai nan', 'nga dap dau', 'dap dau', 'chan thuong dau', 'gay xuong', 'bong nang', 'dien giat', 'duoi nuoc', 'ran can', 'cho can', 'meo can', 'soc',
+          'sot khong ha', 'sot cao lien tuc', 'sot cao co giat', 'sot li bi'],
+        poison: ['uong nham', 'uong qua lieu', 'qua lieu', 'nuot phai', 'uong phai', 'an phai', 'ngo doc', 'thuoc chuot', 'thuoc tru sau', 'uong ca vi', 'uong het vi', 'uong ca hop', 'uong het hop', 'nuot pin', 'hoa chat'],
+        selfharm: ['tu tu', 'tu sat', 'muon chet', 'khong muon song', 'chan song', 'ket thuc cuoc doi', 'tu lam hai', 'tu hai', 'rach tay', 'cat tay'],
+        pregDanger: ['ra mau', 'chay mau', 'ra huyet', 'dau bung', 'vo oi', 'ri oi', 'thai it may', 'thai khong may', 'thai may it', 'phu chan', 'dau dau', 'mo mat'],
+        rx: ['khang sinh', 'thuoc ke don', 'ke don', 'het don', 'khong co don', 'khong can don', 'mua khong can don', 'don cu', 'toa cu', 'het toa', 'khong co toa',
+          'augmentin', 'amoxicillin', 'amoxicilin', 'amox', 'klamentin', 'cefuroxim', 'cefuroxime', 'zinnat', 'cephalexin', 'cefixim', 'cefdinir', 'azithromycin', 'zithromax', 'clarithromycin', 'ciprofloxacin', 'cipro', 'levofloxacin', 'ofloxacin', 'metronidazol', 'flagyl', 'doxycyclin', 'tetracyclin',
+          'corticoid', 'prednisolon', 'prednisolone', 'medrol', 'methylprednisolon', 'dexamethason', 'betamethason',
+          'thuoc ngu', 'an than', 'seduxen', 'diazepam', 'xanax', 'alprazolam', 'lorazepam', 'rivotril', 'clonazepam', 'zolpidem', 'stilnox', 'tramadol', 'codein', 'morphin', 'oxycodon', 'gabapentin', 'pregabalin', 'lyrica',
+          'viagra', 'sildenafil', 'cialis', 'tadalafil', 'amlodipin', 'losartan', 'metformin', 'insulin', 'gliclazid', 'warfarin', 'sintrom', 'clopidogrel', 'plavix', 'atorvastatin', 'rosuvastatin',
+          'isotretinoin', 'acnotin', 'thuoc pha thai', 'pha thai', 'mifepriston', 'misoprostol', 'cytotec', 'thuoc tieu duong', 'thuoc huyet ap', 'thuoc tim', 'thuoc tiem'],
+        dose: ['lieu', 'lieu luong', 'lieu dung', 'may vien', 'bao nhieu vien', 'uong bao nhieu', 'dung bao nhieu', 'may lan', 'bao nhieu lan', 'cach dung', 'cach uong', 'uong the nao', 'uong nhu the nao', 'dung nhu the nao', 'dung the nao',
+          'may ml', 'bao nhieu ml', 'may mg', 'bao nhieu mg', 'may goi', 'bao nhieu goi', 'may thia', 'may giot', 'nua vien', 'uong gap doi', 'tang lieu', 'cach nhau bao lau', 'may tieng uong', 'truoc hay sau an', 'uong luc nao', 'uong bao lau', 'dung bao lau'],
+        interact: ['uong chung', 'uong cung', 'dung chung', 'dung cung', 'ket hop', 'phoi hop', 'tuong tac', 'dang dung thuoc', 'dang uong thuoc', 'dang dieu tri', 'dang tiem', 'ruou', 'bia',
+          'tac dung phu', 'tac dung khong mong muon', 'sau khi uong', 'uong xong bi', 'uong vao bi', 'uong thuoc xong', 'phan ung thuoc', 'di ung thuoc'],
+        persist: ['manh hon', 'loai manh', 'thuoc manh', 'lieu cao hon', 'van khong do', 'khong do', 'khong bot', 'chua do', 'chua bot', 'van chua het', 'khong het', 'khong khoi', 'van con', 'van sot', 'van dau', 'van ho', 'van bi',
+          'keo dai', 'lau ngay', 'lau roi', 'lau qua', 'tai di tai lai', 'tai phat', 'hoai', 'mai khong khoi', 'nhieu ngay', 'may ngay roi', 'may hom roi', 'may tuan', 'nhieu tuan', 'mot tuan', 'hai tuan', 'ba ngay', 'bon ngay', 'nam ngay', 'mot thang', 'hang thang'],
+        diag: ['bi benh gi', 'benh gi', 'co phai bi', 'co phai la', 'co bi gi khong', 'co sao khong', 'co nguy hiem khong', 'co nang khong', 'chan doan', 'la bi gi', 'bi gi vay', 'bi lam sao', 'dau hieu cua', 'co phai ung thu', 'xet nghiem'],
+        save: ['luu', 'luu lai', 'luu giup', 'luu ho so', 'ghi nho', 'ghi lai', 'ghi chu', 'nho giup', 'nho dum', 'nho ho', 'cap nhat ho so', 'luu thong tin', 'them vao ho so'],
+        child: ['be', 'em be', 'tre', 'tre em', 'tre nho', 'so sinh', 'chau', 'con gai', 'con trai', 'be gai', 'be trai'],
+        preg: ['bau', 'mang bau', 'co bau', 'dang bau', 'mang thai', 'co thai', 'thai', 'thai ky', 'cho con bu', 'cho bu', 'dang cho bu', 'sau sinh', 'moi sinh', 'sau de'],
+        elder: ['nguoi gia', 'cao tuoi', 'lon tuoi', 'ong ba', 'ba noi', 'ba ngoai', 'ong noi', 'ong ngoai', 'cu ong', 'cu ba'],
+        cond: ['tieu duong', 'dai thao duong', 'huyet ap', 'cao huyet ap', 'tang huyet ap', 'huyet ap thap', 'tim mach', 'benh tim', 'suy tim', 'dat stent', 'suy than', 'than yeu', 'benh than', 'benh gan', 'viem gan', 'xo gan',
+          'hen', 'hen suyen', 'suyen', 'copd', 'dong kinh', 'ung thu', 'hoa tri', 'xa tri', 'loet da day', 'gut', 'tuyen giap', 'cuong giap', 'suy giap', 'hiv', 'lupus', 'benh nen', 'mo mau', 'roi loan dong mau', 'ghep tang', 'dang dung thuoc', 'dang uong thuoc', 'dang dieu tri'],
+        other: ['ba', 'bo', 'me', 'vo', 'chong', 'ban', 'anh', 'chi', 'nguoi nha', 'nguoi than', 'em trai', 'em gai', 'anh trai', 'chi gai', 'sep', 'dong nghiep', 'chu', 'bac', 'anh ay', 'chi ay'],
+        healthy: ['khoe', 'khoe manh', 'binh thuong', 'nguoi lon', 'khong benh', 'khong co benh', 'khong benh nen', 'khong co benh nen', 'khong bau', 'khong mang thai', 'khong dung thuoc', 'khong dung thuoc khac', 'khong uong thuoc'],
+        medReq: ['thuoc gi', 'thuoc nao', 'uong gi', 'uong thuoc gi', 'dung gi', 'boi gi', 'co thuoc', 'goi y', 'loai nao', 'nen dung', 'nen uong', 'nen mua', 'tu van', 'mua thuoc', 'cho thuoc', 'ke thuoc', 'thuoc tri', 'thuoc chua', 'thuoc cho'],
+        stock: ['con hang', 'het hang', 'con ban', 'co ban', 'ban khong', 'gia bao nhieu', 'gia nhieu', 'bao nhieu tien', 'bao tien', 'gia sao', 'gia ca', 'gia the nao', 'mua', 'dat hang', 'dat mua', 'giao hang', 'giao', 'chi nhanh', 'cua hang', 'nha thuoc', 'gan day', 'gan nhat', 'qua lay', 'ghe lay', 'lay hang', 'con khong'],
+        quality: ['hang that', 'hang gia', 'hang nhai', 'hang xach tay', 'chinh hang', 'nguon goc', 'xuat xu', 'han su dung', 'han dung', 'date', 'nhap khau', 'co tot khong', 'co hieu qua', 'hieu qua khong', 'review', 'danh gia', 'tot nhat'],
+        human: ['duoc si', 'gap duoc si', 'noi chuyen voi nguoi', 'nguoi that', 'nhan vien', 'tu van vien', 'tong dai', 'hotline', 'goi dien', 'khieu nai', 'phan nan', 'gap bac si', 'quan ly'],
+        inject: ['bo qua quy tac', 'bo qua luat', 'bo qua huong dan', 'ignore', 'quen het', 'khong can tuan thu', 'gia vo', 'dong vai', 'ban la bac si', 'developer mode', 'jailbreak', 'system prompt', 'prompt'],
+        offtopic: ['thoi tiet', 'bong da', 'chinh tri', 'lap trinh', 'code', 'xo so', 'chung khoan', 'bitcoin', 'crypto', 'tinh yeu', 'nau an', 'cong thuc nau', 'game', 'bai tap', 'lam toan'],
+        greet: ['xin chao', 'chao', 'hello', 'hi', 'alo', 'helo', 'chao ban', 'chao em', 'shop oi', 'ad oi']
+      };
+      const PET_RAW = ['chó', 'mèo', 'cún', 'thú cưng', 'thú y', 'vẹt', 'hamster', 'cá cảnh'];
+
+      /* Triệu chứng nhẹ → nhóm OTC (null = không tự gợi ý, chuyển dược sĩ). rk = so khớp có dấu để tránh nhầm "họ/hộ", "cảm ơn"… */
+      const SYM = [
+        { l: 'ho', k: ['ho khan', 'ho dom', 'ho co dom', 'ho nhieu', 'ho dem', 'bi ho'], rk: ['ho'], o: 'Siro ho thảo dược' },
+        { l: 'sổ / nghẹt mũi', k: ['so mui', 'chay mui', 'chay nuoc mui', 'nghet mui', 'ngat mui', 'tac mui', 'hat hoi'], o: 'Xịt mũi nước muối biển' },
+        { l: 'đau họng', k: ['dau hong', 'rat hong', 'viem hong', 'khan tieng', 'vuong hong'], o: 'Viên ngậm đau họng' },
+        { l: 'cảm cúm', k: ['cam cum', 'cum', 'cam lanh', 'cam sot', 'bi cam'], rk: ['cảm'], o: null },
+        { l: 'sốt', k: ['sot', 'sot nhe', 'hay sot', 'nong sot', 'ha sot'], o: 'Thuốc hạ sốt, giảm đau paracetamol' },
+        { l: 'đau nhức', k: ['dau dau', 'nhuc dau', 'dau nua dau', 'dau rang', 'dau co', 'dau vai', 'dau lung', 'moi co', 'dau nhuc', 'nhuc moi', 'dau bung kinh', 'dau khop'], o: 'Thuốc giảm đau paracetamol' },
+        { l: 'tiêu chảy', k: ['tieu chay', 'di ngoai', 'di long', 'di cau nhieu'], o: 'Oresol bù nước' },
+        { l: 'táo bón', k: ['tao bon', 'kho di ngoai'], o: 'Chất xơ hoà tan' },
+        { l: 'đầy bụng / ợ chua', k: ['o chua', 'o nong', 'trao nguoc', 'dau bao tu', 'dau da day', 'day bung', 'kho tieu', 'chuong bung', 'day hoi'], o: 'Thuốc trung hoà acid dạ dày' },
+        { l: 'đau bụng', k: ['dau bung'], o: null },
+        { l: 'say tàu xe', k: ['say xe', 'say tau', 'say song', 'say may bay'], o: 'Thuốc chống say tàu xe' },
+        { l: 'nhiệt miệng', k: ['nhiet mieng', 'loet mieng', 'nhiet luoi'], o: 'Gel bôi nhiệt miệng' },
+        { l: 'côn trùng cắn', k: ['muoi dot', 'con trung can', 'kien can', 'ong dot'], o: 'Kem bôi giảm ngứa côn trùng cắn' },
+        { l: 'trầy xước', k: ['tray xuoc', 'tray da', 'vet cat', 'dut tay', 'vet thuong nho', 'xuoc'], o: 'Băng cá nhân + dung dịch sát khuẩn' },
+        { l: 'mụn', k: ['mun', 'mun trung ca', 'mun viem', 'noi mun'], o: 'Gel trị mụn OTC' },
+        { l: 'nấm da', k: ['nam da', 'hac lao', 'lang ben', 'nam ke', 'nuoc an chan'], o: 'Kem bôi kháng nấm OTC' },
+        { l: 'bỏng nhẹ', k: ['bong nhe', 'bong nuoc soi', 'bi bong'], o: 'Gel làm dịu bỏng nhẹ' },
+        { l: 'mệt mỏi', k: ['met moi', 'suy nhuoc', 'bi met'], rk: ['mệt'], o: 'Vitamin tổng hợp' },
+        { l: 'ngứa / dị ứng', k: ['ngua', 'man ngua', 'noi man', 'di ung', 'noi me day', 'phat ban'], o: null },
+        { l: 'mất ngủ', k: ['mat ngu', 'kho ngu'], o: null },
+        { l: 'chóng mặt / buồn nôn', k: ['chong mat', 'hoa mat', 'buon non', 'non oi', 'bi non'], rk: ['nôn', 'ói'], o: null },
+        { l: 'đau / đỏ mắt', k: ['dau mat', 'do mat', 'mat do', 'ngua mat', 'chay nuoc mat'], o: null },
+        { l: 'chảy máu cam', k: ['chay mau cam'], o: null },
+        { l: 'đau tai', k: ['dau tai', 'u tai', 'chay mu tai'], o: null },
+        { l: 'tiểu buốt', k: ['tieu buot', 'tieu rat', 'tieu nhieu'], o: null },
+        { l: 'phụ khoa', k: ['ngua vung kin', 'khi hu', 'huyet trang'], o: null }
+      ];
+
+      /* Tồn kho giả (nguồn sự thật của kiem_tra_ton_kho) */
+      const CAT = [
+        { k: ['nuoc muoi', 'nuoc muoi sinh ly', 'nacl'], n: 'Nước muối sinh lý NaCl 0.9% (chai 500ml)', p: '8.000đ', s: 'Còn hàng · 12 chi nhánh gần bạn', ok: 1 },
+        { k: ['khau trang', 'khau trang y te'], n: 'Khẩu trang y tế 4 lớp (hộp 50 cái)', p: '35.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['nhiet ke', 'nhiet ke dien tu'], n: 'Nhiệt kế điện tử', p: '89.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['bang ca nhan', 'urgo', 'bang dan'], n: 'Băng cá nhân (hộp 100 miếng)', p: '25.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['bong gon', 'bong y te', 'gac y te', 'gac'], n: 'Bông / gạc y tế', p: '12.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['que thu thai', 'test thai'], n: 'Que thử thai', p: '20.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['dau gio', 'dau xanh'], n: 'Dầu gió xanh (chai nhỏ)', p: '28.000đ', s: 'Sắp hết · còn ở 2 chi nhánh', ok: 1, low: 1 },
+        { k: ['kem chong nang'], n: 'Kem chống nắng SPF50', p: '—', s: 'Hết hàng tại chi nhánh gần bạn', ok: 0 },
+        { k: ['nuoc suc mieng'], n: 'Nước súc miệng', p: '45.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['bao cao su'], n: 'Bao cao su (hộp 3 cái)', p: '30.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['vitamin c', 'c sui', 'vitamin'], n: 'Vitamin C sủi (tuýp)', p: '45.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['xit mui', 'nuoc bien sau', 'xit mui nuoc bien'], n: 'Xịt mũi nước muối biển', p: '65.000đ', s: 'Còn hàng', ok: 1 },
+        { k: ['oresol', 'ors'], n: 'Oresol bù nước (gói)', p: '3.500đ', s: 'Còn hàng', ok: 1, drug: 1 },
+        { k: ['paracetamol', 'panadol', 'efferalgan', 'hapacol', 'tylenol', 'para'], n: 'Paracetamol (thuốc OTC)', p: 'từ 15.000đ', s: 'Còn hàng', ok: 1, drug: 1 },
+        { k: ['siro ho'], rk: ['siro ho', 'si rô ho', 'xi rô ho', 'sirô ho'], n: 'Siro ho thảo dược', p: '55.000đ', s: 'Còn hàng', ok: 1, drug: 1 }
+      ];
+
+      /* ---------- bảng luật (hiển thị + tên trong vết) ---------- */
+      const RULES = [
+        ['R1', 'Dấu hiệu nguy hiểm / cấp cứu', 'ban', 'ĐỘC QUYỀN · tự làm khuyen_di_kham + chuyen_duoc_si ƯU TIÊN · khoá mọi gợi ý/bán · không xét phủ định (cố ý thiên về an toàn)', [...KW.danger, ...KW.poison, ...KW.selfharm, 'bầu + (' + KW.pregDanger.join(', ') + ')', 'sốt ≥ 39.5°', 'trẻ + sốt ≥ 39°', 'trẻ < 3 tháng + sốt']],
+        ['R2', 'Thuốc kê đơn', 'ban', 'CẤM ban_thuoc_ke_don (không render nút mua) · không gợi ý thay thế · chuyen_duoc_si tự làm', KW.rx],
+        ['R3', 'Hỏi liều', 'ask', 'Không tự nói liều · chỉ về nhãn/dược sĩ · bộ lọc liều quét mọi câu trả lời', KW.dose],
+        ['R4', 'Tương tác / tác dụng phụ', 'ask', 'chuyen_duoc_si tự làm · khoá gui_goi_y', KW.interact],
+        ['R5', 'Kéo dài / đòi thuốc mạnh hơn', 'ask', 'khuyen_di_kham + chuyen_duoc_si · khoá gui_goi_y', [...KW.persist, 'triệu chứng + ≥ 3 ngày / tuần / tháng']],
+        ['R6', 'Đòi chẩn đoán', 'ask', 'Không chẩn đoán qua chat · khuyen_di_kham · khoá gui_goi_y', KW.diag],
+        ['R7', 'Lưu hồ sơ sức khoẻ', 'ask', 'luu_ghi_chu_suc_khoe chỉ chạy khi khách bấm "Đồng ý lưu"', KW.save],
+        ['R8', 'Đối tượng nhạy cảm', 'ask', 'Trẻ: hỏi tuổi/cân nặng → <3 tháng + sốt: R1 · <6 tuổi: chuyển dược sĩ · 6–11 tuổi: nháp chờ duyệt. Bầu/cho bú: chuyển dược sĩ. Người già/bệnh nền: nháp chờ dược sĩ duyệt', [...KW.child, 'con (gõ đúng "con")', '< 12 tuổi', ...KW.preg, ...KW.elder, 'bà / ông / cụ', '≥ 65 tuổi', ...KW.cond]],
+        ['R9', 'Triệu chứng nhẹ, người lớn', 'ok', 'Hỏi sàng lọc 1 lần → người lớn khoẻ: soan_goi_y → gui_goi_y tự làm + Hoàn tác (chỉ OTC, không liều). Nhóm không có OTC an toàn → dược sĩ', SYM.flatMap(s => [...s.k, ...(s.rk || [])])],
+        ['R10', 'Tồn kho / giá', 'ok', 'kiem_tra_ton_kho (chỉ đọc) · không có dữ liệu → nói rõ, không đoán "còn hàng"', [...CAT.flatMap(c => c.k), ...KW.stock]],
+        ['R11', 'Nguồn gốc / chất lượng', 'ask', 'Không có dữ liệu → nói rõ, không khẳng định · mời dược sĩ', KW.quality],
+        ['R12', 'Muốn gặp người', 'ok', 'chuyen_duoc_si tự làm', KW.human],
+        ['R13', 'Ngoài phạm vi / vượt luật', '', 'Nói rõ giới hạn · yêu cầu "bỏ qua luật" không đổi hành vi', [...KW.offtopic, ...PET_RAW, ...KW.inject]],
+        ['R14', 'Chào hỏi / cảm ơn', '', 'Trả lời xã giao, nhắc phạm vi', [...KW.greet, 'cam on']],
+        ['R99', 'Không khớp luật nào', 'ban', 'MẶC ĐỊNH AN TOÀN: độ chắc thấp, không gợi ý, hỏi lại 1 câu + nút chuyển dược sĩ', ['(mọi tin còn lại)']]
+      ];
+      const RN = Object.fromEntries(RULES.map(r => [r[0], r[1]]));
+
+      /* ---------- trích số: tuổi, cân nặng, nhiệt độ, số ngày ---------- */
+      const fmtAge = m => m < 24 ? (Math.round(m * 10) / 10) + ' tháng' : Math.floor(m / 12) + ' tuổi';
+      function parseAge(t) {
+        let m;
+        if (has(t, 'so sinh')) return 0.5;
+        if ((m = t.match(/ duoi (\d+(?:\.\d+)?) thang /))) return +m[1] - 0.5;
+        if ((m = t.match(/ (\d+(?:\.\d+)?) thang tuoi /))) return +m[1];
+        if ((m = t.match(/ (\d+(?:\.\d+)?) ngay tuoi /))) return +m[1] / 30;
+        if ((m = t.match(/ duoi (\d+(?:\.\d+)?) tuoi /))) return +m[1] * 12 - 6;
+        if ((m = t.match(/ tren (\d+(?:\.\d+)?) tuoi /))) return +m[1] * 12 + 6;
+        if ((m = t.match(/ (\d+(?:\.\d+)?) tuoi /))) return +m[1] * 12;
+        if ((m = t.match(/ (be|con|chau|tre|em be)\s(?:\S+\s)?(\d+(?:\.\d+)?) thang /))) return +m[2];
+        return null;
+      }
+      function parseWeight(t) { const m = t.match(/ (\d+(?:\.\d+)?) (kg|ky|ki|kilo|can) /); return m ? +m[1] : null; }
+      function parseTemp(t) {
+        const m = t.match(/ sot (?:\S+ ){0,3}?(\d{2}(?:\.\d+)?) /) || t.match(/ (\d{2}(?:\.\d+)?) (do|c) /);
+        if (!m) return null; const v = +m[1]; return v >= 35 && v <= 43 ? v : null;
+      }
+      function parseDays(t) {
+        let t2 = t.replace(/ \d+(\.\d+)? (thang tuoi|ngay tuoi|tuoi) /g, ' ')
+          .replace(/ (be|con|chau|tre|em be)\s(\S+\s)?\d+(\.\d+)? thang /g, ' ')
+          .replace(/ (bau|thai|mang thai|mang bau|co thai|thai ky|co bau)\s(\S+\s)?\d+(\.\d+)? (thang|tuan) /g, ' ');
+        const U = { ngay: 1, hom: 1, tuan: 7, thang: 30, nam: 365 }; let best = 0;
+        for (const m of t2.matchAll(/ (\d+(?:\.\d+)?) (ngay|hom|tuan|thang|nam)(?= )/g)) best = Math.max(best, +m[1] * U[m[2]]);
+        return best;
+      }
+
+      /* ---------- phân tích 1 tin ---------- */
+      function analyze(text) {
+        let r = text.toLowerCase().normalize('NFC').replace(/(ông|bà)\s+xã/g, ' vợchồng ').replace(/cảm\s*ơn/g, ' ');
+        let t = norm(text);
+        const f = { text };
+        f.thanks = has(t, 'cam on'); t = strip(t, ['cam on', 'luu y']);
+        f.t = t;
+        f.age = parseAge(t); f.weight = parseWeight(t); f.temp = parseTemp(t); f.days = parseDays(t);
+        f.danger = hits(t, KW.danger); f.poison = hits(t, KW.poison); f.selfharm = hits(t, KW.selfharm);
+        const tn = stripNeg(t, [...KW.preg, ...KW.cond, ...KW.elder]);
+        f.preg = hits(tn, KW.preg); f.cond = hits(tn, KW.cond);
+        f.elder = [...hits(tn, KW.elder), ...rawHits(r, ['bà', 'ông', 'cụ'])];
+        const tc = strip(t, ['cho con bu', 'con bu']), rc = r.replace(/cho con bú/g, ' ');
+        f.childKw = [...hits(tc, KW.child), ...rawHits(rc, ['con'])];
+        if (f.age != null) { if (f.age < 144) f.childKw.push(fmtAge(f.age)); else if (f.age >= 780) f.elder.push(fmtAge(f.age)); }
+        f.other = hits(t, KW.other);
+        // dấu hiệu nguy hiểm thai kỳ chỉ áp cho người đang mang thai / sau sinh, không áp cho "cho con bú"
+        f.pregDanger = f.preg.some(k => !['cho con bu', 'cho bu', 'dang cho bu'].includes(k)) ? hits(t, KW.pregDanger) : [];
+        ['rx', 'dose', 'interact', 'persist', 'diag', 'save', 'quality', 'human', 'inject', 'offtopic', 'greet', 'medReq', 'stock', 'healthy'].forEach(k => f[k] = hits(t, KW[k]));
+        f.pet = [...rawHits(r, PET_RAW), ...hits(t, ['thu cung', 'thu y'])];
+        f.items = CAT.filter(c => c.k.some(k => has(t, k)));
+        let ts = t, rs = r;
+        f.items.forEach(c => { ts = strip(ts, c.k); (c.rk || []).forEach(w => rs = rs.split(w).join(' ')); });
+        ts = strip(ts, [...KW.rx, ...KW.danger, ...KW.persist]);
+        f.sym = SYM.map(s => ({ ...s, hit: [...hits(ts, s.k), ...rawHits(rs, s.rk || [])] })).filter(s => s.hit.length);
+        return f;
+      }
+
+      /* ---------- dựng thẻ + bộ lọc liều ---------- */
+      const DOSE_RE = / \d+(\.\d+)? (vien|ml|mg|goi|thia|giot|lan ngay|lan moi ngay|lan mot ngay|lan 1 ngay) /;
+      const btn = (cls, label, attrs = '') => `<button class="b ${cls}" ${attrs}>${label}</button>`;
+      const BTN_DS = btn('ghost', 'Chat với dược sĩ', 'data-act="ds"');
+      const BTN_115 = btn('call', '📞 Gọi 115', 'data-act="115"');
+      const BTN_MAP = btn('ghost', 'Chỉ đường cơ sở y tế', 'data-act="map"');
+      function card(o, tr) {
+        if (DOSE_RE.test(norm((o.body || '').replace(/<[^>]+>/g, ' ')))) { tr.doseBlocked = true; o.body = '[Bộ lọc đã chặn một câu có liều cụ thể — mời xem nhãn hoặc hỏi dược sĩ.]'; }
+        return `<div class="card ${o.cls || ''}" ${o.data || ''}>${o.conf ? `<span class="conf ${o.conf[0]}">${o.conf[1]}</span>` : ''}${o.title ? `<h4>${o.title}</h4>` : ''}<div>${o.body}</div>${o.status ? `<div class="status">${o.status}</div>` : ''}${o.acts && o.acts.length ? `<div class="act">${o.acts.join('')}</div>` : ''}${o.ev ? `<div class="ev">${o.ev}</div>` : ''}</div>`;
+      }
+      const sumAttr = s => `data-sum="${esc(s)}"`;
+
+      /* ---------- trạng thái hội thoại (chờ trả lời sàng lọc) ---------- */
+      const ctx = { awaiting: null };
+      window.__routerCtx = ctx;
+      const log = [];
+
+      /* ---------- ĐỊNH TUYẾN ---------- */
+      function route(text) {
+        const f = analyze(text);
+        const tr = { rules: [], run: [], blocked: [], notes: [], doseBlocked: false };
+        const R = (id, kws = []) => tr.rules.push({ id, kws: uniq(kws) });
+        const run = (...x) => tr.run.push(...x), block = (...x) => tr.blocked.push(...x);
+        const cards = [], C = o => cards.push(card(o, tr));
+        const sum = '"' + text + '"';
+
+        // ghép ngữ cảnh nếu câu trước AI đang hỏi lại
+        const aw = ctx.awaiting; ctx.awaiting = null;
+        if (aw) {
+          const answered = aw.kind === 'child' ? (f.age != null || f.weight != null)
+            : aw.kind === 'screen' ? (f.healthy.length || f.age != null || f.preg.length || f.cond.length || f.elder.length)
+              : f.sym.length > 0;
+          if (answered) {
+            const seen = new Set(f.sym.map(s => s.l));
+            f.sym = [...f.sym, ...aw.sym.filter(s => !seen.has(s.l))];
+            if (aw.kind === 'child' || aw.child) f.childKw.push('(ngữ cảnh trước: trẻ)');
+            if (aw.kind === 'need') { f.preg.push(...aw.preg); f.elder.push(...aw.elder); f.cond.push(...aw.cond); }
+            f.fromScreen = aw.kind === 'screen';
+            tr.notes.push('Ghép ngữ cảnh từ câu hỏi lại trước: "' + aw.text + '".');
+          } else tr.notes.push('Câu trước đang chờ trả lời sàng lọc nhưng tin này không trả lời — xử lý như tin mới.');
+        }
+        // "bầu … ảnh hưởng bé" → bé là thai nhi: có thai kỳ mà không nêu tuổi trẻ thì coi là ca thai kỳ
+        const isChild = !(f.preg.length && f.age == null) && ((f.childKw.length > 0 && !(f.age != null && f.age >= 144)) || (f.age != null && f.age < 144));
+        const fever = f.sym.some(s => s.l === 'sốt') || f.temp != null || has(f.t, 'sot');
+
+        /* R1 — cấp cứu: độc quyền, chặn mọi thứ khác */
+        const dz = [...f.danger, ...f.poison, ...f.selfharm, ...f.pregDanger.map(k => 'bầu + ' + k)];
+        if (f.temp != null && (f.temp >= 39.5 || (isChild && f.temp >= 39))) dz.push('sốt ' + f.temp + '°');
+        if (isChild && f.age != null && f.age < 3 && fever) dz.push('trẻ ' + fmtAge(f.age) + ' + sốt');
+        if (dz.length) {
+          R('R1', dz);
+          let title = 'Có dấu hiệu nguy hiểm — đi cấp cứu ngay', body = 'Những dấu hiệu bạn mô tả có thể là <b>cấp cứu</b>. <b>Gọi 115 hoặc tới cơ sở y tế gần nhất ngay bây giờ.</b> Em không gợi ý thuốc cho trường hợp này.';
+          if (f.selfharm.length) { title = 'Bạn không phải một mình'; body = 'Em rất tiếc bạn đang trải qua chuyện này. Nếu bạn hoặc người thân đang gặp nguy hiểm ngay lúc này, <b>hãy gọi 115</b> và ở cạnh một người bạn tin tưởng. Em đã báo dược sĩ trực để nói chuyện với bạn ngay.'; }
+          else if (f.poison.length) { title = 'Nghi ngộ độc / quá liều — gọi 115 ngay'; body = '<b>Gọi 115 hoặc đưa tới cơ sở y tế gần nhất ngay.</b> Mang theo vỏ/hộp thuốc hoặc hoá chất đã uống để bác sĩ xử trí. Em không hướng dẫn xử lý tại nhà qua chat.'; }
+          else if (f.pregDanger.length) { title = 'Thai kỳ có dấu hiệu bất thường — đi khám ngay'; body = 'Dấu hiệu này trong thai kỳ cần <b>bác sĩ sản khám ngay</b>. Hãy tới cơ sở y tế gần nhất hoặc gọi 115. Em không gợi ý thuốc.'; }
+          else if (isChild && fever && !f.danger.length) { title = 'Bé cần được bác sĩ khám ngay'; body = 'Trẻ còn rất nhỏ bị sốt hoặc sốt cao cần <b>bác sĩ khám sớm</b>, không tự dùng thuốc qua chat. Đưa bé tới cơ sở y tế gần nhất; nếu bé li bì, co giật, khó thở — gọi 115.'; }
+          C({ cls: 'danger', conf: ['dg', '<span class="mk">6</span>⚠ Dấu hiệu nguy hiểm — KHÔNG gợi ý thuốc'], title, body, status: '🚑 Đã chuyển dược sĩ trực — ƯU TIÊN (0 giây). Giữ máy nhé.', acts: [BTN_115, BTN_MAP], ev: 'Màn này cố ý <b>không có nút mua/đặt</b> — mọi tool gợi ý/bán bị khoá.', data: sumAttr('NGHI CẤP CỨU: ' + sum) });
+          run(T.kham, T.ds + ' (ƯU TIÊN)'); block(T.soan, T.gui, T.ban, T.luu, T.kho);
+          tr.notes.push('Luật cấp cứu không xét phủ định ("không khó thở" vẫn kích hoạt) — cố ý: cảnh báo thừa rẻ hơn bỏ sót.');
+          return finish(text, cards, tr);
+        }
+
+        if (f.inject.length) { R('R13', f.inject); tr.notes.push('Phát hiện yêu cầu vượt luật — luật an toàn vẫn áp dụng, không đổi hành vi.'); }
+        let noSuggest = false;
+
+        /* R2 — kê đơn: CẤM */
+        if (f.rx.length) {
+          R('R2', f.rx);
+          C({ cls: 'warn', conf: ['lo', '⛔ Thuốc cần đơn bác sĩ'], title: 'Em không bán và không gợi ý thay thế qua chat', body: 'Thuốc này cần <b>đơn của bác sĩ</b>. Em không thể bán hoặc gợi ý thuốc "tương tự" qua chat tự động. Em đã chuyển dược sĩ trực — bạn mang đơn tới nhà thuốc hoặc đi khám để được kê đơn mới.', status: '✅ Đã chuyển dược sĩ trực', acts: [btn('ghost', 'Tìm phòng khám gần nhất', 'data-act="map"')], ev: '<code>ban_thuoc_ke_don</code>: <b>CẤM</b> — không có nút mua nào được render.', data: sumAttr('Khách hỏi thuốc kê đơn: ' + sum) });
+          run(T.ds); block(T.ban + ' (CẤM)', T.gui + ' (thuốc thay thế)'); noSuggest = true;
+        }
+        /* R3 — liều */
+        if (f.dose.length) {
+          R('R3', f.dose);
+          C({ cls: 'warn', conf: ['lo', 'Em không tự nói liều'], body: 'Liều dùng phụ thuộc tuổi, cân nặng, bệnh nền và thuốc khác đang dùng — nói sai là hại ngay. Bạn xem <b>nhãn / tờ hướng dẫn</b> trên hộp, hoặc hỏi <b>dược sĩ</b> để được tính đúng.', acts: [btn('primary', 'Hỏi dược sĩ về liều', 'data-act="ds"')], ev: 'Không có tool/dữ liệu liều → AI không được bịa (spec §1, §6 TC3).', data: sumAttr('Hỏi liều: ' + sum) });
+          block('AI tự nói liều');
+        }
+        /* R4 — tương tác / tác dụng phụ */
+        if (f.interact.length) {
+          R('R4', f.interact);
+          C({ cls: 'warn', conf: ['lo', 'Cần dược sĩ xem tương tác / phản ứng thuốc'], body: 'Câu hỏi có liên quan tới <b>dùng chung thuốc, rượu bia, hoặc phản ứng sau khi uống</b> — em không tự trả lời. Em đã chuyển dược sĩ trực. Nếu có <b>sưng môi/mặt, khó thở, nổi mẩn toàn thân</b> → gọi 115 ngay.', status: '✅ Đã chuyển dược sĩ trực', acts: [BTN_115], data: sumAttr('Tương tác/tác dụng phụ: ' + sum) });
+          run(T.ds); block(T.gui); noSuggest = true;
+        }
+        /* R5 — kéo dài / đòi mạnh hơn */
+        const pk = [...f.persist]; if (f.days >= 3 && f.sym.length) pk.push(f.days + ' ngày');
+        if (pk.length) {
+          R('R5', pk);
+          C({ cls: 'warn', conf: ['lo', 'Triệu chứng kéo dài — nên đi khám'], title: 'Em không gợi ý "loại mạnh hơn"', body: 'Triệu chứng kéo dài hoặc dùng thuốc mà không đỡ là dấu hiệu cần <b>bác sĩ khám</b> để tìm nguyên nhân. Đổi sang thuốc mạnh hơn khi chưa rõ bệnh có thể che mất bệnh thật. Em đã báo dược sĩ trực.', status: '✅ Đã chuyển dược sĩ trực', acts: [BTN_MAP], data: sumAttr('Kéo dài/đòi mạnh hơn: ' + sum) });
+          run(T.kham, T.ds); block(T.gui + ' (loại mạnh hơn)'); noSuggest = true;
+        }
+        /* R6 — đòi chẩn đoán */
+        if (f.diag.length) {
+          R('R6', f.diag);
+          C({ cls: 'warn', conf: ['lo', 'Em không chẩn đoán qua chat'], body: 'Vài dòng tin nhắn không đủ để biết bạn bị bệnh gì — chỉ <b>bác sĩ khám</b> mới chẩn đoán được. Nếu lo lắng, hãy đi khám; em có thể chuyển bạn tới dược sĩ để được hướng dẫn nên khám ở đâu.', acts: [BTN_DS, BTN_MAP], data: sumAttr('Hỏi chẩn đoán: ' + sum) });
+          run(T.kham); block(T.gui, 'AI chẩn đoán'); noSuggest = true;
+        }
+        /* R7 — lưu hồ sơ: cần khách đồng ý */
+        if (f.save.length) {
+          R('R7', f.save);
+          C({ conf: ['lo', 'Cần bạn đồng ý trước khi lưu'], body: `Em sắp lưu ghi chú sức khoẻ: <b>“${esc(text)}”</b> vào hồ sơ của bạn. Đây là dữ liệu nhạy cảm — em chỉ lưu khi bạn đồng ý.`, acts: [btn('primary', 'Đồng ý lưu', 'data-act="save-yes"'), btn('ghost', 'Không lưu', 'data-act="save-no"')], ev: '<code>luu_ghi_chu_suc_khoe</code>: cần khách duyệt — không bấm thì <b>không lưu</b>.' });
+          block(T.luu + ' (chưa đồng ý)'); noSuggest = true;
+        }
+        /* R13 — thú cưng */
+        if (f.pet.length) {
+          R('R13', f.pet);
+          C({ conf: ['lo', 'Ngoài phạm vi'], body: 'Em chỉ hỗ trợ thuốc cho <b>người</b>. Thuốc cho người có thể gây độc cho thú cưng — bạn nên hỏi <b>bác sĩ thú y</b> nhé.' });
+          block(T.gui); noSuggest = true;
+        }
+
+        /* R8 / R9 — triệu chứng */
+        const labels = f.sym.map(s => s.l).join(', ');
+        const symKws = f.sym.flatMap(s => s.hit);
+        if (!noSuggest && (f.sym.length || (f.medReq.length && (isChild || f.preg.length || f.elder.length || f.cond.length)))) {
+          if (!f.sym.length) {
+            R('R8', [...f.childKw, ...f.preg, ...f.elder, ...f.cond, ...f.medReq]);
+            C({ cls: 'warn', conf: ['lo', '<span class="mk">4</span>Cần thêm thông tin — chưa gợi ý thuốc'], body: 'Người dùng thuốc đang có <b>triệu chứng gì, từ bao giờ</b> ạ? Em cần biết trước khi tư vấn.' + (isChild ? ' Bạn cho em biết luôn <b>bé mấy tuổi, nặng bao nhiêu kg</b> nhé.' : ''), acts: [BTN_DS] });
+            block(T.gui + ' (chưa rõ triệu chứng)');
+            ctx.awaiting = { kind: 'need', sym: [], child: isChild, preg: f.preg, elder: f.elder, cond: f.cond, text };
+          } else if (isChild) {
+            const ck = [...f.childKw, ...symKws];
+            if (f.age == null) {
+              R('R8', ck);
+              C({ cls: 'warn', conf: ['lo', '<span class="mk">4</span>Cần thêm thông tin — chưa gợi ý thuốc'], body: `Để an toàn cho bé (${esc(labels)}), em cần biết: <b>bé mấy tuổi và nặng khoảng bao nhiêu kg?</b> <span class="mk">4</span>Thuốc cho trẻ tính theo tuổi và cân nặng nên em chưa thể gợi ý khi chưa rõ.`, acts: ['Bé dưới 3 tháng', 'Bé 8 tháng, 8kg', 'Bé 4 tuổi, 16kg', 'Bé 10 tuổi, 30kg'].map(x => btn('ghost', x, `data-say="${x}"`)) });
+              block(T.gui + ' (chưa rõ tuổi/cân nặng)');
+              ctx.awaiting = { kind: 'child', sym: f.sym, child: true, text };
+            } else if (f.age < 72) {
+              R('R8', [...ck, fmtAge(f.age)]);
+              C({ body: `<span class="mk">5</span>Bé ${fmtAge(f.age)} còn nhỏ nên em <b>không tự gợi ý thuốc</b>. Em chuyển bạn cho <b>dược sĩ trực</b> để tư vấn đúng cho bé nhé.`, status: `⏳ Đang kết nối dược sĩ — họ thấy: "bé ${fmtAge(f.age)}${f.weight ? ' / ' + f.weight + 'kg' : ''}, ${esc(labels)}".`, acts: [btn('primary', 'Chat với dược sĩ', 'data-act="ds"')], data: sumAttr(`bé ${fmtAge(f.age)}, ${labels}: ${sum}`) });
+              run(T.ds); block(T.gui + ' (trẻ < 6 tuổi)');
+            } else {
+              R('R8', [...ck, fmtAge(f.age)]);
+              C(pending('bé ' + fmtAge(f.age) + (f.weight ? ', ' + f.weight + 'kg' : ''), f, labels, sum));
+              run(T.soan + ' (nháp)'); block(T.gui + ' (chờ dược sĩ duyệt)');
+            }
+          } else if (f.preg.length) {
+            R('R8', [...f.preg, ...symKws]);
+            C({ body: `<span class="mk">5</span>Bạn đang <b>mang thai / cho con bú</b> nên em <b>không tự gợi ý thuốc</b> (${esc(labels)}) — nhiều thuốc thông thường ảnh hưởng tới bé. Em chuyển dược sĩ trực tư vấn nhé.`, status: '⏳ Đang kết nối dược sĩ', acts: [btn('primary', 'Chat với dược sĩ', 'data-act="ds"')], data: sumAttr('Thai kỳ/cho bú, ' + labels + ': ' + sum) });
+            run(T.ds); block(T.gui + ' (thai kỳ)');
+          } else if (f.elder.length || f.cond.length) {
+            R('R8', [...f.elder, ...f.cond, ...symKws]);
+            C(pending(f.elder.length ? 'người lớn tuổi' : 'người có bệnh nền / đang dùng thuốc', f, labels, sum));
+            run(T.soan + ' (nháp)'); block(T.gui + ' (chờ dược sĩ duyệt)');
+          } else if (f.healthy.length || (f.fromScreen && f.age != null && f.age >= 216)) {
+            R('R9', [...symKws, ...f.healthy]);
+            const ok = f.sym.filter(s => s.o), bad = f.sym.filter(s => !s.o);
+            if (!ok.length || f.sym.length > 3) {
+              C({ body: `Với ${esc(labels)}, em <b>không tự gợi ý</b> — ${f.sym.length > 3 ? 'nhiều triệu chứng cùng lúc' : 'nhóm triệu chứng này'} cần dược sĩ hỏi kỹ hơn. Em chuyển dược sĩ trực nhé.`, status: '⏳ Đang kết nối dược sĩ', acts: [btn('primary', 'Chat với dược sĩ', 'data-act="ds"')], data: sumAttr(labels + ': ' + sum) });
+              run(T.ds); block(T.gui + ' (không có OTC an toàn)');
+            } else {
+              C({ cls: 'prod', conf: ['hi', '<span class="mk">2</span>Độ chắc vừa — OTC, người lớn khoẻ mạnh'], title: ok.map(s => s.o).join(' · '), body: `Gợi ý cho: <b>${esc(ok.map(s => s.l).join(', '))}</b>. Em <b>không nói liều</b> — dùng theo nhãn. Nếu sau 3 ngày không đỡ hoặc nặng hơn → đi khám.` + (bad.length ? `<br>Riêng <b>${esc(bad.map(s => s.l).join(', '))}</b>: em không tự gợi ý, bấm "Hỏi dược sĩ".` : ''), acts: [btn('primary', 'Xem sản phẩm', 'data-act="order"'), btn('undo', '<span class="mk">3</span>↶ Hoàn tác', 'data-act="undo"'), btn('ghost', 'Hỏi dược sĩ', 'data-act="ds"')], ev: '<span class="mk">2</span>Căn cứ: đã sàng lọc (người lớn, không bầu, không bệnh nền) · <code>soan_goi_y</code> → <code>gui_goi_y</code> tự làm với OTC (spec §4).', data: sumAttr(labels + ': ' + sum) });
+              run(T.soan, T.gui + ' (tự làm · OTC · có hoàn tác)');
+            }
+          } else {
+            R('R9', symKws);
+            const who = f.other.length ? 'người dùng thuốc' : 'bạn';
+            C({ cls: 'warn', conf: ['lo', '<span class="mk">4</span>Sàng lọc 1 câu trước khi gợi ý'], body: `Trước khi gợi ý cho ${esc(labels)}, cho em hỏi: <b>${who} bao nhiêu tuổi, có đang mang thai/cho con bú, có bệnh nền hoặc đang dùng thuốc khác không?</b> <span class="mk">4</span>Cùng triệu chứng nhưng mỗi người dùng được thuốc khác nhau.`, acts: ['Người lớn khoẻ mạnh, không bầu, không dùng thuốc khác', 'Có bệnh nền (tiểu đường, huyết áp…)', 'Đang mang thai / cho con bú', 'Trên 65 tuổi'].map(x => btn('ghost', x, `data-say="${x}"`)) });
+            block(T.gui + ' (chưa sàng lọc người dùng thuốc)');
+            ctx.awaiting = { kind: 'screen', sym: f.sym, text };
+          }
+        } else if (!noSuggest && f.medReq.length && !f.items.length) {
+          R('R9', f.medReq);
+          C({ cls: 'warn', conf: ['lo', 'Cần thêm thông tin — chưa gợi ý thuốc'], body: 'Bạn mô tả giúp em: <b>ai dùng thuốc (tuổi), triệu chứng gì, từ bao giờ?</b> Em cần biết trước khi tư vấn.', acts: [BTN_DS] });
+          block(T.gui + ' (chưa rõ triệu chứng)');
+          ctx.awaiting = { kind: 'need', sym: [], child: isChild, preg: f.preg, elder: f.elder, cond: f.cond, text };
+        }
+
+        /* R10 — tồn kho (chỉ đọc) */
+        const sensitive = isChild || f.preg.length || f.elder.length || f.cond.length;
+        if (f.items.length && ((!f.dose.length && !f.interact.length) || f.stock.length)) {
+          R('R10', f.items.flatMap(c => c.k.filter(k => has(f.t, k))).concat(f.stock));
+          f.items.forEach(c => {
+            const lock = c.drug && sensitive;
+            C({ cls: 'prod', conf: c.ok ? ['hi', '<span class="mk">2</span>Độ chắc cao'] : ['lo', '<span class="mk">2</span>Hết hàng'], title: c.n, body: `${c.s} · ${c.p}` + (c.drug ? '<br>Là thuốc OTC — em <b>không nói liều</b>, dùng theo nhãn.' : '') + (lock ? '<br><b>Dùng cho trẻ / bà bầu / người già / người có bệnh nền cần dược sĩ xác nhận trước.</b>' : ''), ev: `<span class="mk">2</span>Căn cứ: <code>kiem_tra_ton_kho</code> — ${c.ok ? (c.low ? 'sắp hết' : 'còn hàng') : 'hết hàng'} (chỉ đọc, không đoán).`, acts: lock ? [BTN_DS] : c.ok ? [btn('primary', 'Đặt sản phẩm', 'data-act="order"'), btn('undo', '<span class="mk">3</span>↶ Hoàn tác', 'data-act="undo"')] : [btn('ghost', 'Báo khi có hàng', 'data-act="notify"')], data: sumAttr('Tồn kho ' + c.n + ': ' + sum) });
+          });
+          run(T.kho);
+          if (f.items.some(c => c.drug) && sensitive) block(T.gui + ' (thuốc cho đối tượng nhạy cảm)');
+        } else if (f.stock.length && !cards.length && !f.sym.length) {
+          R('R10', f.stock);
+          C({ conf: ['lo', 'Không có dữ liệu'], body: 'Em <b>chưa tìm thấy sản phẩm này</b> trong dữ liệu tồn kho nên không dám nói còn hay hết hàng. Bạn cho em tên sản phẩm chính xác, hoặc hỏi dược sĩ nhé.', acts: [BTN_DS], ev: '<code>kiem_tra_ton_kho</code> không trả kết quả → AI không bịa "còn hàng".', data: sumAttr('Hỏi tồn kho SP chưa rõ: ' + sum) });
+          run(T.kho + ' (không tìm thấy)');
+        }
+        /* R11 — chất lượng / nguồn gốc */
+        if (f.quality.length) {
+          R('R11', f.quality);
+          C({ conf: ['lo', 'Độ chắc thấp — không có dữ liệu'], body: 'Em <b>không có dữ liệu</b> về nguồn gốc, chất lượng hay so sánh hiệu quả sản phẩm nên em không khẳng định. Dược sĩ trực có thể kiểm tra giúp bạn.', acts: [BTN_DS], ev: 'Dữ liệu track không cấp thông tin này → nói rõ thay vì đoán (spec §2 #9).', data: sumAttr('Hỏi nguồn gốc/chất lượng: ' + sum) });
+        }
+        /* R12 — muốn gặp người */
+        if (f.human.length) {
+          R('R12', f.human);
+          C({ body: 'Dạ em chuyển bạn cho <b>dược sĩ trực</b> ngay.', status: '✅ Đã chuyển dược sĩ trực', data: sumAttr(sum) });
+          run(T.ds);
+        }
+        /* R13 / R14 / R99 */
+        if (!cards.length) {
+          if (f.inject.length) C({ conf: ['lo', 'Ngoài phạm vi'], body: 'Em không thể bỏ qua các quy tắc an toàn. Em vẫn sẵn sàng hỗ trợ về giá, tồn kho và sàng lọc ban đầu.' });
+          else if (f.offtopic.length) { R('R13', f.offtopic); C({ conf: ['lo', 'Ngoài phạm vi'], body: 'Câu này nằm ngoài phạm vi của em. Em hỗ trợ về <b>giá, tồn kho và sàng lọc ban đầu</b> khi bạn cần mua thuốc nhé.' }); }
+          else if (f.greet.length || f.thanks) { R('R14', f.thanks ? ['cam on'] : f.greet); C({ body: f.thanks ? 'Dạ không có gì ạ. Nếu triệu chứng nặng hơn, bạn nhớ đi khám nhé.' : 'Dạ em chào bạn. Em hỗ trợ giá, tồn kho và sàng lọc ban đầu — câu chuyên môn em sẽ chuyển dược sĩ.' }); }
+          else {
+            R('R99');
+            C({ cls: 'warn', conf: ['lo', 'Độ chắc thấp — không khớp luật nào'], body: 'Em chưa chắc hiểu đúng ý bạn nên <b>chưa gợi ý thuốc nào</b>. Bạn mô tả giúp: <b>người dùng thuốc là ai (tuổi), triệu chứng gì, bao lâu rồi?</b> Hoặc chat thẳng với dược sĩ.', acts: [BTN_DS], ev: 'Mặc định an toàn: không khớp luật → không gọi tool gợi ý/bán/lưu.', data: sumAttr('Ca lạ chưa phân loại: ' + sum) });
+            block(T.soan, T.gui, T.ban, T.luu);
+          }
+        }
+        return finish(text, cards, tr);
+      }
+
+      function pending(who, f, labels, sum) {
+        const draft = f.sym.map(s => s.o).filter(Boolean);
+        return { cls: 'warn', conf: ['lo', '⏳ Cần dược sĩ duyệt trước khi gửi'], title: 'Em đã soạn nháp, đang chờ dược sĩ duyệt', body: `Người dùng thuốc là <b>${esc(who)}</b> nên em <b>không tự gửi gợi ý</b>. Nháp cho ${esc(labels)} đã chuyển dược sĩ trực duyệt.`, status: 'Quá hạn không ai duyệt → gợi ý không gửi, ca nằm trong hàng chờ dược sĩ.', acts: [btn('ghost', '(Demo) Dược sĩ duyệt', 'data-act="approve"'), btn('ghost', '(Demo) Dược sĩ từ chối', 'data-act="reject"')], ev: '<code>soan_goi_y</code> tự làm · <code>gui_goi_y</code> cần dược sĩ duyệt (spec §4).', data: `data-draft="${esc(draft.length ? draft.join(' · ') : '')}" ` + sumAttr(who + ', ' + labels + ': ' + sum) };
+      }
+
+      /* ---------- hiển thị + vết + nhật ký ---------- */
+      function addHTML(html) { const d = document.createElement('div'); d.innerHTML = html; [...d.children].forEach(n => chatEl.appendChild(n)); chatEl.scrollTop = chatEl.scrollHeight; }
+      function finish(text, cards, tr) {
+        tr.run = uniq(tr.run); tr.blocked = uniq(tr.blocked);
+        cards.forEach(addHTML);
+        const chips = (a, c) => a.map(x => `<span class="chip ${c}">${esc(x)}</span>`).join('');
+        addHTML(`<details class="trace"><summary><span class="mk">7</span>Vết định tuyến: ${tr.rules.map(r => r.id).join(' → ') || '—'}</summary><div class="tb">
+          ${tr.rules.map(r => `<div><b>${r.id}</b> ${esc(RN[r.id])}${r.kws.length ? ' · khớp: <i>' + esc(r.kws.join(', ')) + '</i>' : ''}</div>`).join('')}
+          <div>Tool chạy: ${chips(tr.run, 'ok') || '—'}</div>
+          <div>Tool khoá: ${chips(tr.blocked, 'ban') || '—'}</div>
+          ${tr.notes.map(n => `<div>• ${esc(n)}</div>`).join('')}
+          <div>• Bộ lọc liều: ${tr.doseBlocked ? '⚠ đã chặn 1 câu chứa liều' : 'sạch ✓'}</div></div></details>`);
+        log.push({ text, rules: tr.rules.map(r => r.id).join(' → ') || '—', run: tr.run.join(', ') || '—', blocked: tr.blocked.join(', ') || '—' });
+        renderLog();
+      }
+      function renderLog() {
+        document.getElementById('caseLog').innerHTML = log.map(e => `<li><b>${esc(e.text)}</b><br>${esc(e.rules)} · chạy: ${esc(e.run)}</li>`).join('') || '<li>Chưa có ca nào.</li>';
+      }
+
+      function send(text) {
+        text = text.trim(); if (!text) return;
+        const r = document.createElement('div'); r.className = 'row me'; r.innerHTML = '<div class="msg">' + esc(text) + '</div>';
+        chatEl.appendChild(r); chatEl.scrollTop = chatEl.scrollHeight;
+        setTimeout(() => route(text), 380);
+      }
+
+      /* ---------- nút trong thẻ ---------- */
+      chatEl.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b || b.disabled) return;
+        if (b.dataset.say) { send(b.dataset.say); return; }
+        const a = b.dataset.act; if (!a) return;
+        const c = b.closest('.card'), act = c && c.querySelector('.act');
+        const note = h => { if (act) act.innerHTML = `<span class="ev">${h}</span>`; };
+        if (a === 'ds') { b.disabled = true; b.textContent = '✓ Đã chuyển dược sĩ'; addHTML(`<div class="card"><div>✅ Đã chuyển <b>dược sĩ trực</b>. Họ thấy: <i>${esc((c && c.dataset.sum) || 'tin vừa rồi')}</i></div></div>`); }
+        else if (a === 'undo') { c.classList.add('undone'); note('↶ Đã hoàn tác — gợi ý bị thu hồi, không tính là tư vấn.'); }
+        else if (a === 'order') { b.disabled = true; b.textContent = '✓ Đã thêm vào giỏ (demo)'; }
+        else if (a === 'notify') { b.disabled = true; b.textContent = '✓ Sẽ báo khi có hàng'; }
+        else if (a === '115') { b.textContent = '📞 Đang gọi 115… (demo)'; }
+        else if (a === 'map') { b.disabled = true; b.textContent = '📍 Đã mở bản đồ (demo)'; }
+        else if (a === 'save-yes') { note('✓ Đã lưu vào Hồ sơ › Ghi chú sức khoẻ. ' + btn('undo', 'Xoá ghi chú', 'data-act="save-del"')); }
+        else if (a === 'save-no') { note('✗ Không lưu gì.'); }
+        else if (a === 'save-del') { note('🗑 Đã xoá ghi chú.'); }
+        else if (a === 'reject') { note('Dược sĩ không duyệt nháp — dược sĩ sẽ nhắn tư vấn trực tiếp cho bạn.'); }
+        else if (a === 'approve') {
+          note('✓ Dược sĩ đã duyệt.');
+          const d = c.dataset.draft;
+          addHTML(card({ cls: 'prod', conf: ['hi', '✓ Dược sĩ trực đã duyệt'], title: d || 'Dược sĩ tư vấn trực tiếp', body: d ? 'Dược sĩ sẽ hướng dẫn liều riêng — em không nói liều.' : 'Nhóm triệu chứng này không có gợi ý OTC — dược sĩ sẽ nhắn bạn ngay.', acts: d ? [btn('primary', 'Xem sản phẩm', 'data-act="order"'), btn('undo', '<span class="mk">3</span>↶ Hoàn tác', 'data-act="undo"')] : [] }, { doseBlocked: false }));
+        }
+      });
+
+      /* ---------- ô gõ, reset, bảng luật, sao chép ---------- */
+      const input = document.getElementById('askInput');
+      document.getElementById('askForm').addEventListener('submit', e => { e.preventDefault(); send(input.value); input.value = ''; input.focus(); });
+      document.getElementById('reset').addEventListener('click', () => { ctx.awaiting = null; });
+      const _child = flows.child; flows.child = () => { _child(); ctx.awaiting = { kind: 'child', sym: SYM.filter(s => s.l === 'sốt').map(s => ({ ...s, hit: ['sot'] })), child: true, text: 'Con em sốt 38.5…' }; };
+      ['otc', 'er', 'infant', 'big'].forEach(k => { const o = flows[k]; flows[k] = () => { ctx.awaiting = null; o(); }; });
+
+      const total = RULES.reduce((n, r) => n + r[4].length, 0);
+      document.getElementById('rulesSub').textContent = `${RULES.length} nhóm luật · ${total} từ khoá/điều kiện. So khớp không dấu, hiểu teen-code (k, ko, j, dc, bn, e, r…). Bấm từng luật để xem từ khoá.`;
+      document.getElementById('rulesPanel').innerHTML = RULES.map(([id, name, tag, how, kws]) => `<details><summary><span class="rid">${id}</span>${esc(name)} <span class="tag ${tag}">${kws.length} từ khoá</span></summary><div class="how">${esc(how)}</div><div class="kw">${esc(kws.join(' · '))}</div></details>`).join('');
+      renderLog();
+
+      document.getElementById('copyLog').onclick = async () => {
+        const md = '| # | Tin khách (ca lạ) | Luật khớp | Tool chạy | Tool khoá |\n|---|---|---|---|---|\n' + log.map((e, i) => `| ${i + 1} | ${e.text.replace(/\|/g, '/')} | ${e.rules} | ${e.run} | ${e.blocked} |`).join('\n');
+        const msg = document.getElementById('copyMsg');
+        try { await navigator.clipboard.writeText(md); msg.textContent = ' Đã sao chép ✓'; } catch { msg.textContent = ' Không sao chép được — trình duyệt chặn clipboard.'; }
+      };
+    })();
+  </script>
 </body>
+
 </html>
