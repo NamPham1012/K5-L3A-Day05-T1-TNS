@@ -133,17 +133,21 @@ Tin khách: *"con e sốt 38.5 từ tối qua, có thuốc gì cho hạ k ạ"*
 
 ## §5. Prototype  *(R5 — 25đ · phần chính)*
 
-- **Link hoặc file:** `prototype/` (xem README trong thư mục)
-- **Công cụ:** … · **Phần nào mock:** … · **Có lời gọi AI thật không:** …
-- **Ảnh đánh số** (để trong `prototype/`):
+- **Link hoặc file:** `prototype/index.html` (mở bằng trình duyệt — bấm được, không backend)
+- **Công cụ:** HTML/CSS/JS thuần (coding agent Claude) · **Phần mock:** dữ liệu tồn kho, phản hồi AI, danh tính dược sĩ đều giả · **Lời gọi AI thật:** không (có thể thêm ở ô sàng lọc để lấy bonus)
+- **3 ca bấm thử:** 🟢 OTC nước muối (#7) · 🟡 trẻ sốt (#1) · 🔴 cấp cứu (#4). Nút "Ẩn/hiện chú thích HAX" bật các số ①–⑥.
+- **Ảnh đánh số** (chụp để trong `prototype/screens/`):
 
-| Số trên ảnh | Thể hiện gì | Nguyên tắc HAX/PAIR | Mức tự chủ |
+| Số | Thể hiện gì | Nguyên tắc HAX/PAIR | Mức tự chủ |
 |---|---|---|---|
-| ① |  |  |  |
-| ② |  |  |  |
-| ③ |  |  |  |
+| ① | Header "Bạn đang chat với Trợ lý AI" | G1/G2 — minh bạch (Luật AI 134/2025 Đ.11) | — |
+| ② | Nhãn "Độ chắc" + dòng "Căn cứ: còn hàng…" | G2 — hiện độ chắc & bằng chứng | tự làm |
+| ③ | Nút **Hoàn tác** cạnh gợi ý OTC | G9 — sửa/hoàn tác dễ | **tự làm** (`gui_goi_y` cho OTC) |
+| ④ | Ca trẻ sốt: AI **hỏi lại**, chưa có thẻ sản phẩm | G10 + G11 — nghi ngờ thì thu hẹp & giải thích | chưa gọi `gui_goi_y` |
+| ⑤ | Trẻ nhỏ → nút **Chuyển dược sĩ**, không tự gợi ý | chuyển người | **cần người** |
+| ⑥ | Ca cấp cứu: thẻ đỏ + nút 115, **không có nút mua** | G10 + PAIR Graceful Failure | **cấm** (`ban_thuoc_ke_don`) |
 
-- **Quyết định:** cách hiện độ chắc/bằng chứng và điều khiển mức tự chủ — đã nghĩ cách nào khác, vì sao chọn cách này — …
+- **Quyết định:** chọn hiện độ chắc bằng **nhãn chữ + dòng căn cứ** thay vì % số — đã nghĩ tới hiện phần trăm tin cậy nhưng loại vì khách phổ thông dễ hiểu nhầm con số, và % giả tạo cảm giác chính xác. Mức tự chủ hiện bằng **sự có/không của nút**: tự làm thì có nút Hoàn tác; cần người thì chỉ có nút Chuyển dược sĩ; cấm thì màn cấp cứu không render nút mua nào.
 
 ---
 
